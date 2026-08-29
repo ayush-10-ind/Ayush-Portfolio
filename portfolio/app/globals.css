@@ -3,63 +3,41 @@
 @tailwind utilities;
 
 /* ==========================================================================
-   Warm Ivory / Parchment Cinematic Palette — Ayush Trivedi Portfolio
+   Blade & Steel Cinematic Palette — Ayush Trivedi Portfolio
    ========================================================================== */
 
 :root {
-  --color-bg:               #F4F0E6;
-  --color-bg-paper:         #E9E2D2;
-  --color-surface:          #FFFDF7;
-  --color-surface-elev:     #FFFFFF;
-  --color-border:           rgba(32, 37, 34, 0.12);
-  --color-border-strong:    rgba(32, 37, 34, 0.24);
+  --color-void-deep:        #080B10;
+  --color-slate-steel:      #111620;
+  --color-whetstone:        #1D2432;
+  --color-steel-white:      #F0F4F8;
+  --color-mist-gray:        #8B949E;
+  --color-dim-gray:         #484F58;
 
-  --color-text-primary:     #202522;
-  --color-text-secondary:   #62645D;
-  --color-text-tertiary:    #8C8B82;
+  --color-blade-crimson:    #E63946;
+  --color-blade-glow:       rgba(230, 57, 70, 0.4);
+  --color-wano-jade:        #2EA043;
+  --color-gold-accent:      #D4A853;
 
-  --color-pitch-green:      #29483A;
-  --color-pitch-deep:       #19352A;
-  --color-accent:           #C86B3C; /* Warm Terracotta */
-  --color-accent-muted:     #D48B64;
-  --color-accent-subtle:    #F7EBE3;
-  --color-gold:             #C59A4A;
-
-  --color-success:          #29483A;
-  --color-warning:          #C59A4A;
-  --color-error:            #A64238;
-
-  --space-1:  8px;
-  --space-2:  16px;
-  --space-3:  24px;
-  --space-4:  32px;
-  --space-5:  48px;
-  --space-6:  64px;
-  --space-7:  96px;
-  --space-8:  128px;
-  --space-9:  192px;
-  --space-10: 256px;
+  --color-cut-line:         rgba(240, 244, 248, 0.1);
+  --color-cut-strong:       rgba(240, 244, 248, 0.22);
 
   --font-display:  'Playfair Display', Georgia, serif;
   --font-body:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono:     'JetBrains Mono', 'Fira Code', monospace;
 
-  --text-display-xl: clamp(56px, 9vw, 140px);
-  --text-display-lg: clamp(40px, 6.5vw, 96px);
-  --text-display-md: clamp(28px, 4.5vw, 60px);
-  --text-heading-lg: clamp(22px, 2.5vw, 36px);
-  --text-heading-md: clamp(17px, 1.8vw, 24px);
+  --text-display-xl: clamp(60px, 9.5vw, 150px);
+  --text-display-lg: clamp(42px, 7vw, 100px);
+  --text-display-md: clamp(28px, 4.5vw, 62px);
+  --text-heading-lg: clamp(22px, 2.5vw, 38px);
+  --text-heading-md: clamp(17px, 1.8vw, 26px);
   --text-body-lg:    clamp(16px, 1.3vw, 19px);
   --text-body-md:    clamp(14px, 1.1vw, 16px);
   --text-body-sm:    13px;
   --text-mono-md:    13px;
   --text-mono-sm:    11px;
 
-  --ease-out:       cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out:    cubic-bezier(0.45, 0, 0.55, 1);
-  --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
-
-  --max-width:     1400px;
+  --max-width:     1440px;
   --gutter:        clamp(20px, 5vw, 96px);
   --gutter-mobile: 16px;
 }
@@ -69,62 +47,82 @@
     --dur-instant:   0ms;
     --dur-fast:      0ms;
     --dur-normal:    0ms;
-    --dur-medium:    0ms;
-    --dur-slow:      0ms;
   }
 }
 
 /* ==========================================================================
-   Base Styles & Parchment Texture
+   Base Styles & Atmospheric Volumetric Space
    ========================================================================== */
 
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--color-bg);
+  background-color: var(--color-void-deep);
 }
 
 body {
-  background-color: var(--color-bg);
+  background-color: var(--color-void-deep);
   background-image: 
-    radial-gradient(circle at 15% 15%, rgba(200, 107, 60, 0.03) 0%, transparent 40%),
-    radial-gradient(circle at 85% 85%, rgba(41, 72, 58, 0.04) 0%, transparent 50%),
-    linear-gradient(to bottom, transparent, rgba(233, 226, 210, 0.3) 100%);
-  color: var(--color-text-primary);
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(230, 57, 70, 0.04), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 90% 50%, rgba(46, 160, 67, 0.03), transparent 60%),
+    radial-gradient(ellipse 70% 60% at 10% 80%, rgba(29, 36, 50, 0.5), transparent 70%);
+  background-attachment: fixed;
+  color: var(--color-steel-white);
   font-family: var(--font-body);
   font-size: var(--text-body-md);
   line-height: 1.75;
   overflow-x: hidden;
 }
 
-/* Subtle Hand-Drawn / Architectural Line Accents */
-.sketch-line {
-  border-color: var(--color-border);
+/* 3D Spatial Canvas Utilities */
+.spatial-canvas-3d {
+  perspective: 1400px;
+  perspective-origin: center center;
+  transform-style: preserve-3d;
 }
 
-.sketch-border {
-  border: 1px solid var(--color-border);
-  background-color: var(--color-surface);
-  box-shadow: 0 4px 20px -2px rgba(32, 37, 34, 0.04);
+.spatial-plane {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
-.paper-sheet {
-  background-color: var(--color-surface);
-  border: 1px solid rgba(32, 37, 34, 0.08);
-  box-shadow: 0 10px 30px -5px rgba(32, 37, 34, 0.08), 0 2px 6px -1px rgba(32, 37, 34, 0.04);
+/* Diagonal Katana-Cut Framing */
+.katana-cut-left {
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
 }
 
+.katana-cut-right {
+  clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.steel-panel {
+  background-color: var(--color-slate-steel);
+  border: 1px solid var(--color-cut-line);
+  box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.7);
+}
+
+.steel-panel:hover {
+  border-color: var(--color-cut-strong);
+}
+
+.steel-monolith {
+  background: linear-gradient(180deg, #161C28 0%, #0F141E 100%);
+  border: 1px solid var(--color-cut-line);
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(240, 244, 248, 0.08);
+}
+
+/* Typography Rules */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   font-weight: 400;
-  line-height: 1.1;
-  color: var(--color-text-primary);
-  letter-spacing: -0.015em;
+  line-height: 1.08;
+  color: var(--color-steel-white);
+  letter-spacing: -0.02em;
 }
 
 p {
-  color: var(--color-text-secondary);
+  color: var(--color-mist-gray);
   max-width: 65ch;
 }
 
@@ -138,37 +136,36 @@ code, pre, kbd, samp {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-blade-crimson);
   outline-offset: 3px;
-  border-radius: 2px;
 }
 
 ::selection {
-  background: var(--color-accent-subtle);
-  color: var(--color-accent);
+  background: var(--color-blade-crimson);
+  color: #FFFFFF;
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
-  background: var(--color-bg);
+  width: 5px;
+  background: var(--color-void-deep);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(32, 37, 34, 0.18);
-  border-radius: 3px;
+  background: var(--color-whetstone);
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent);
+  background: var(--color-blade-crimson);
 }
 
-/* Skip to Content Accessibility Link */
+/* Skip to Content Link */
 .skip-link {
   position: absolute;
   top: -100%;
   left: 16px;
-  background: var(--color-pitch-green);
-  color: #FFFDF7;
+  background: var(--color-blade-crimson);
+  color: #FFFFFF;
   padding: 8px 16px;
   font-family: var(--font-mono);
   font-size: 12px;

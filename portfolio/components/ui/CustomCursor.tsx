@@ -52,8 +52,8 @@ export default function CustomCursor() {
       <div
         className={`rounded-full transition-all duration-150 ${
           isPointer
-            ? "w-7 h-7 bg-[rgba(200,107,60,0.2)] border border-[#C86B3C]"
-            : "w-3 h-3 bg-[#29483A]"
+            ? "w-8 h-8 bg-[rgba(230,57,70,0.15)] border border-[#E63946]"
+            : "w-2.5 h-2.5 bg-[#E63946] shadow-[0_0_6px_#E63946]"
         }`}
       />
     </div>

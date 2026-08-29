@@ -18,7 +18,7 @@ export default function AssistantPanel() {
       id: "welcome",
       role: "assistant",
       content:
-        "Welcome to Ayush Trivedi's Research Archive. I can provide verified details on his software engineering projects (such as AgniPress), Explainable AI research, AICTE Python internship, technical skills, or academic record.",
+        "Welcome to Ayush Trivedi's Shihan Archive. I provide verified factual details regarding his software engineering architecture (AgniPress), Explainable AI research, AICTE Python internship, or academic record.",
       timestamp: Date.now(),
     },
   ]);
@@ -78,7 +78,7 @@ export default function AssistantPanel() {
         {
           id: `err-${Date.now()}`,
           role: "assistant",
-          content: "Unable to complete request at this time. Please review the case studies and resume sheets directly.",
+          content: "Unable to complete request at this time. Please inspect the case studies and resume archive directly.",
           timestamp: Date.now(),
         },
       ]);
@@ -89,15 +89,15 @@ export default function AssistantPanel() {
 
   return (
     <>
-      {/* Editorial Research Archive Trigger Button */}
+      {/* Editorial Command Trigger Button */}
       <div className="fixed bottom-6 right-6 z-40">
         <button
           onClick={() => setIsOpen(true)}
-          className="font-mono text-xs uppercase tracking-wider px-4 py-2.5 bg-[#FFFDF7] text-[var(--color-text-primary)] border border-[var(--color-border-strong)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] shadow-lg transition-all duration-200 flex items-center gap-2"
-          aria-label="Open Research Archive"
+          className="font-mono text-xs uppercase tracking-wider px-4 py-2.5 bg-[#111620] text-[var(--color-steel-white)] border border-[var(--color-cut-strong)] hover:border-[var(--color-blade-crimson)] hover:text-[var(--color-blade-crimson)] shadow-2xl transition-all duration-150 flex items-center gap-2"
+          aria-label="Open Shihan Archive"
         >
-          <span className="w-2 h-2 rounded-full bg-[var(--color-accent)]" />
-          <span>RESEARCH ARCHIVE ↗</span>
+          <span className="w-2 h-2 rounded-full bg-[var(--color-blade-crimson)] shadow-[0_0_8px_var(--color-blade-crimson)]" />
+          <span>SHIHAN ARCHIVE ↗</span>
         </button>
       </div>
 
@@ -106,22 +106,22 @@ export default function AssistantPanel() {
         <div
           role="dialog"
           aria-modal="true"
-          aria-label="Research Archive Panel"
-          className="fixed inset-y-0 right-0 z-50 w-full max-w-lg bg-[#FFFDF7] border-l border-[var(--color-border)] shadow-2xl flex flex-col justify-between"
+          aria-label="Shihan Archive Panel"
+          className="fixed inset-y-0 right-0 z-50 w-full max-w-lg bg-[#080B10] border-l border-[var(--color-cut-line)] shadow-2xl flex flex-col justify-between"
         >
           {/* Header */}
-          <div className="p-6 border-b border-[var(--color-border)] flex items-center justify-between bg-[#F4F0E6]">
+          <div className="p-6 border-b border-[var(--color-cut-line)] flex items-center justify-between bg-[#111620]">
             <div>
-              <span className="font-mono text-[10px] text-[var(--color-accent)] uppercase tracking-widest block font-medium">
-                GROUNDED REASONING INDEX
+              <span className="font-mono text-[10px] text-[var(--color-blade-crimson)] uppercase tracking-widest block font-medium">
+                GROUNDED KNOWLEDGE INDEX
               </span>
-              <h2 className="font-display text-xl text-[var(--color-text-primary)] font-normal">
-                Research Archive
+              <h2 className="font-display text-xl text-[var(--color-steel-white)] font-normal">
+                Shihan Archive
               </h2>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="font-mono text-xs uppercase px-3 py-1 border border-[var(--color-border-strong)] bg-[#FFFDF7] hover:border-[var(--color-accent)] text-[var(--color-text-primary)] transition-colors"
+              className="font-mono text-xs uppercase px-3 py-1 border border-[var(--color-cut-strong)] bg-[#080B10] hover:border-[var(--color-blade-crimson)] text-[var(--color-steel-white)] transition-colors"
             >
               Close
             </button>
@@ -139,15 +139,15 @@ export default function AssistantPanel() {
                   <div
                     className={`max-w-[85%] p-4 text-xs font-body leading-relaxed ${
                       isUser
-                        ? "bg-[var(--color-pitch-green)] text-[#FFFDF7] rounded-xs"
-                        : "bg-[#F4F0E6] text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-xs"
+                        ? "bg-[var(--color-blade-crimson)] text-white rounded-xs"
+                        : "bg-[#111620] text-[var(--color-steel-white)] border border-[var(--color-cut-line)] rounded-xs"
                     }`}
                   >
                     <p>{m.content}</p>
 
                     {m.groundedFacts && m.groundedFacts.length > 0 && (
-                      <div className="mt-2.5 pt-2 border-t border-[var(--color-border)] font-mono text-[10px] text-[var(--color-text-secondary)]">
-                        <span className="text-[var(--color-accent)] block font-medium">GROUNDED CITATIONS:</span>
+                      <div className="mt-2.5 pt-2 border-t border-[var(--color-cut-line)] font-mono text-[10px] text-[var(--color-mist-gray)]">
+                        <span className="text-[var(--color-wano-jade)] block font-medium">GROUNDED CITATIONS:</span>
                         <ul className="list-disc pl-3 pt-0.5 space-y-0.5">
                           {m.groundedFacts.slice(0, 3).map((f: string, idx: number) => (
                             <li key={idx}>{f}</li>
@@ -160,8 +160,8 @@ export default function AssistantPanel() {
               );
             })}
             {isLoading && (
-              <div className="flex items-center gap-2 font-mono text-xs text-[var(--color-accent)] p-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] animate-ping" />
+              <div className="flex items-center gap-2 font-mono text-xs text-[var(--color-blade-crimson)] p-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-blade-crimson)] animate-ping" />
                 <span>Searching verified archives...</span>
               </div>
             )}
@@ -171,21 +171,21 @@ export default function AssistantPanel() {
           {/* Input Form */}
           <form
             onSubmit={handleSubmit}
-            className="p-4 border-t border-[var(--color-border)] bg-[#F4F0E6] flex gap-2"
+            className="p-4 border-t border-[var(--color-cut-line)] bg-[#111620] flex gap-2"
           >
             <input
               type="text"
               value={inputQuery}
               onChange={(e) => setInputQuery(e.target.value)}
               placeholder="Ask about AgniPress, XAI, Java, or experience..."
-              className="flex-1 bg-[#FFFDF7] border border-[var(--color-border-strong)] px-3 py-2 text-xs font-body text-[var(--color-text-primary)] placeholder-[var(--color-text-tertiary)] focus:outline-none focus:border-[var(--color-accent)]"
+              className="flex-1 bg-[#080B10] border border-[var(--color-cut-strong)] px-3 py-2 text-xs font-body text-[var(--color-steel-white)] placeholder-[var(--color-dim-gray)] focus:outline-none focus:border-[var(--color-blade-crimson)]"
             />
             <button
               type="submit"
               disabled={isLoading || !inputQuery.trim()}
-              className="font-mono text-xs px-4 py-2 bg-[var(--color-pitch-green)] text-[#FFFDF7] hover:bg-[var(--color-pitch-deep)] disabled:opacity-50 transition-colors uppercase font-medium"
+              className="font-mono text-xs px-4 py-2 bg-[var(--color-blade-crimson)] text-white hover:bg-[#d42d3a] disabled:opacity-50 transition-colors uppercase font-medium"
             >
-              Ask
+              Query
             </button>
           </form>
         </div>

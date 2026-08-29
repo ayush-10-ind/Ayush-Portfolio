@@ -2,14 +2,13 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import KickoffScene from "./scenes/KickoffScene";
-import AboutSystemScene from "./scenes/AboutSystemScene";
-import ResumeStudioScene from "./scenes/ResumeStudioScene";
-import AgniPressPipelineScene from "./scenes/AgniPressPipelineScene";
-import XaiAnalyticsScene from "./scenes/XaiAnalyticsScene";
-import ExperienceTimelineScene from "./scenes/ExperienceTimelineScene";
-import CraftWorkbenchScene from "./scenes/CraftWorkbenchScene";
+import SystemsMindsetScene from "./scenes/SystemsMindsetScene";
+import SpatialResumeScene from "./scenes/SpatialResumeScene";
+import AgniPressScene from "./scenes/AgniPressScene";
+import XaiResearchScene from "./scenes/XaiResearchScene";
+import CareerPathScene from "./scenes/CareerPathScene";
+import CraftArsenalScene from "./scenes/CraftArsenalScene";
 import FullTimeFinaleScene from "./scenes/FullTimeFinaleScene";
-import FootballJourney from "@/components/spatial/FootballJourney";
 import { useReducedMotion } from "framer-motion";
 
 export default function CinematicStage() {
@@ -42,25 +41,22 @@ export default function CinematicStage() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full bg-[#F4F0E6] text-[var(--color-text-primary)]"
+      className="relative w-full bg-[var(--color-void-deep)] text-[var(--color-steel-white)]"
       style={{
         height: shouldReduceMotion ? "auto" : "700vh",
       }}
     >
-      {/* Sticky 100vh Viewport Stage */}
+      {/* Sticky 100vh Spatial Camera Frustum */}
       <div className={`${shouldReduceMotion ? "relative min-h-screen" : "sticky top-0 h-screen w-full overflow-hidden"}`}>
-        {/* Persistent Hand-Crafted Football & Tactical Path */}
-        <FootballJourney />
-
-        {/* Cinematic Scenes Layer */}
-        <div className="relative w-full h-full">
+        {/* Continuous Spatial Scenes Layer */}
+        <div className="relative w-full h-full spatial-canvas-3d">
           <KickoffScene progress={scrollProgress} />
-          <AboutSystemScene progress={scrollProgress} />
-          <ResumeStudioScene progress={scrollProgress} />
-          <AgniPressPipelineScene progress={scrollProgress} />
-          <XaiAnalyticsScene progress={scrollProgress} />
-          <ExperienceTimelineScene progress={scrollProgress} />
-          <CraftWorkbenchScene progress={scrollProgress} />
+          <SystemsMindsetScene progress={scrollProgress} />
+          <SpatialResumeScene progress={scrollProgress} />
+          <AgniPressScene progress={scrollProgress} />
+          <XaiResearchScene progress={scrollProgress} />
+          <CareerPathScene progress={scrollProgress} />
+          <CraftArsenalScene progress={scrollProgress} />
           <FullTimeFinaleScene progress={scrollProgress} />
         </div>
       </div>
