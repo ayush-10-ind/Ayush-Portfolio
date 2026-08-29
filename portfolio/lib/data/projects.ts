@@ -1,34 +1,46 @@
-// lib/data/projects.ts — Authoritative featured projects for Ayush Trivedi
+// lib/data/projects.ts — 100% verified factual projects for Ayush Trivedi
 import type { Project } from "@/types/portfolio";
 
 export const projects: Project[] = [
   {
     id: "agnipress",
-    name: "AgniPress",
-    tagline: "Full-stack publishing engine engineered with clean architectural separation and optimized content delivery.",
-    type: "Full-Stack Application / Web Systems",
+    name: "AgniPress (News Portal)",
+    tagline: "Full-stack publishing engine & news platform with Spring Boot, JPA, and automated feed ingestion.",
+    type: "Full-Stack Web Systems / Java",
     status: "complete",
     period: "2025",
     problem:
-      "Modern editorial platforms frequently suffer from monolithic bloat, slow database querying for content hierarchies, and brittle coupling between editorial management and reading experiences.",
+      "Modern news platforms require real-time aggregation from multi-source external APIs, scheduled background ingestion, user personalization (bookmarks, reading history), and secure role-based authentication without system degradation.",
     solution:
-      "Engineered AgniPress as an efficient, modern publishing engine with modular service boundaries for content persistence, API delivery, and responsive editorial interfaces.",
+      "Engineered a full-stack publishing portal using Java 21, Spring Boot 3, and Spring Data JPA. Developed automated scheduling services for external news and weather APIs, role-based access control with OAuth2 login, dynamic bookmarking, live channel streaming, and reading history tracking.",
     architecture:
-      "Decoupled full-stack architecture featuring structured database storage, API layer for content retrieval, and a responsive frontend reading experience.",
+      "Decoupled MVC & DTO architecture separating Controller endpoints, Service business logic, JPA Repository persistence, scheduled background jobs (NewsScheduler, NewsCleanupService), and custom Spring Security filter chains.",
     decisions: [
       {
-        question: "Why a decoupled architecture for AgniPress?",
-        answer: "Decoupling content management from presentation allows independent scalability, caching optimization, and clean API boundaries for diverse client consumers.",
-        alternativesConsidered: "A coupled monolithic CMS was considered, but decoupled services provide superior maintainability and performance.",
+        question: "Why Spring Boot and Spring Data JPA for AgniPress?",
+        answer: "Spring Boot provides robust dependency injection, production-ready security integrations, and transaction management, while Spring Data JPA simplifies relational data modeling for users, bookmarks, categories, and articles.",
+        alternativesConsidered: "Considered lightweight microframeworks, but Spring Boot was chosen for comprehensive enterprise security, declarative transactions, and mature ORM tooling.",
+      },
+      {
+        question: "How is external news ingestion handled?",
+        answer: "Implemented scheduled background tasks (NewsScheduler) using Spring WebClient and custom DTO mappers to fetch, validate, and persist external article feeds while cleaning up stale records asynchronously.",
       },
     ],
     challenges: [
-      "Designing efficient relational and document schemas for dynamic content categorization and authoring.",
-      "Ensuring sub-second content rendering and responsive typography across diverse devices.",
+      "Managing relational data integrity across interconnected user interactions (bookmarks, notifications, reading history, OAuth accounts).",
+      "Handling external API schema variations and rate limits with robust exception handling and fallback mapping.",
     ],
     outcome:
-      "High-performance publishing engine with clean codebase structure and scalable content management workflows.",
-    technologies: ["JavaScript / TypeScript", "Node.js", "Database Systems", "React / Modern Web", "REST APIs"],
+      "Complete full-stack publishing platform with role-based security, OAuth2 integration, automated background news ingestion, and responsive editorial interfaces.",
+    technologies: [
+      "Java 21",
+      "Spring Boot 3",
+      "Spring Data JPA",
+      "Spring Security (OAuth2)",
+      "Oracle / Relational DBMS",
+      "Thymeleaf / HTML5 / CSS3",
+      "REST APIs & WebClient",
+    ],
     links: {
       github: "https://github.com",
     },
@@ -43,25 +55,25 @@ export const projects: Project[] = [
     status: "complete",
     period: "2024 – 2025",
     problem:
-      "Understanding model predictions and decision-making processes in machine learning models that often function as opaque black boxes.",
+      "Machine learning models often operate as opaque black boxes, making it challenging to understand decision boundaries, interpret predictions, and audit algorithmic outcomes.",
     solution:
-      "Researched Explainable AI (XAI) techniques to analyze model predictions, improve transparency, and evaluate decision-making pipelines for improved interpretability.",
+      "Researched and evaluated Explainable AI (XAI) methods to inspect model inference mechanisms, analyze feature importance distributions, and enhance model interpretability.",
     architecture:
-      "Python-based machine learning workflow analyzing feature attributions and prediction interpretability.",
+      "Python-based machine learning analytics pipeline analyzing model inference activations, prediction interpretability, and feature attribution.",
     decisions: [
       {
-        question: "Why Python and ML frameworks for Explainable AI?",
-        answer: "Python provides robust machine learning libraries and computational tooling suited for model auditing and interpretability algorithms.",
-        alternativesConsidered: "Evaluated generic analytical tooling, but Python offered the most cohesive ecosystem for machine learning research.",
+        question: "Why Python for Explainable AI research?",
+        answer: "Python provides the standard scientific and machine learning ecosystem necessary for matrix computations, model inspection, and rapid algorithmic validation.",
+        alternativesConsidered: "Considered R, but Python was chosen for broader framework interoperability and standard ML library tooling.",
       },
     ],
     challenges: [
       "Analyzing decision boundaries across complex machine learning model predictions.",
-      "Providing clear, interpretable representations of model decision mechanics.",
+      "Providing clear, interpretable representations of model decision mechanics without mathematical distortion.",
     ],
     outcome:
-      "Completed research analysis on XAI methods with public GitHub repository and YouTube technical demonstration.",
-    technologies: ["Python", "Machine Learning", "Explainable AI (XAI)"],
+      "Completed comprehensive research analysis on XAI methods with public GitHub repository and YouTube technical demonstration.",
+    technologies: ["Python", "Machine Learning", "Explainable AI (XAI)", "Data Analysis"],
     links: {
       github: "https://github.com",
       live: "https://youtube.com",
@@ -72,21 +84,21 @@ export const projects: Project[] = [
   {
     id: "flappy-bird-java",
     name: "Flappy Bird Game",
-    tagline: "Java-based game implementing collision detection, obstacle generation, score tracking, and OOP principles.",
+    tagline: "Java desktop game engine implementing collision physics, obstacle generation, score tracking, and OOP principles.",
     type: "Desktop Application / Systems",
     status: "complete",
     period: "2024",
     problem:
-      "Designing deterministic 2D game loops, real-time bounding-box collision detection, dynamic obstacle spawning, and score tracking.",
+      "Designing a deterministic 2D game loop with real-time coordinate bounding-box collision detection, obstacle generation, and score tracking without frame stutter.",
     solution:
-      "Developed a Java-based Flappy Bird game applying object-oriented programming principles to manage game logic, collision detection, and obstacle generation.",
+      "Developed a pure Java game applying object-oriented programming principles to manage game logic, collision detection algorithms, obstacle spawning, and game state transitions.",
     architecture:
-      "Object-oriented architecture cleanly separating game entities, collision detection routines, obstacle generation algorithms, and score tracking state.",
+      "Object-oriented architecture cleanly separating game entities, coordinate collision detection algorithms, obstacle generator routines, and score state management.",
     decisions: [
       {
-        question: "Why Java for the game?",
-        answer: "Java provides strong object-oriented programming foundations, deterministic control over entity state, and robust memory management.",
-        alternativesConsidered: "Considered script-based alternatives, but Java was chosen to solidify core OOP and data structures principles.",
+        question: "Why Java for desktop game development?",
+        answer: "Java enforces strong static typing, explicit memory modeling, and OOP encapsulation, making it ideal for mastering deterministic state machines and entity management.",
+        alternativesConsidered: "Considered script-based canvas frameworks, but Java was chosen to solidify core OOP and computational foundations.",
       },
     ],
     challenges: [
@@ -94,8 +106,8 @@ export const projects: Project[] = [
       "Managing game state transitions (start, active gameplay, game over, score reset).",
     ],
     outcome:
-      "Functional desktop game demonstrating OOP principles, published on GitHub.",
-    technologies: ["Java", "Object-Oriented Programming (OOP)", "Collision Detection"],
+      "Functional desktop game demonstrating OOP principles and collision physics, published on GitHub.",
+    technologies: ["Java", "Object-Oriented Programming (OOP)", "Collision Detection", "Data Structures"],
     links: {
       github: "https://github.com",
     },
@@ -119,7 +131,7 @@ export const projects: Project[] = [
       {
         question: "Why HTML5, CSS3, and JavaScript?",
         answer: "Mastering foundational web standards ensures responsive performance, semantic structure, and smooth animations without heavy dependencies.",
-        alternativesConsidered: "Static template generators were considered, but building from fundamentals ensured direct control over UI responsiveness and dark mode design.",
+        alternativesConsidered: "Static site generators were considered, but building from fundamentals ensured direct control over UI responsiveness and dark mode design.",
       },
     ],
     challenges: [
@@ -128,7 +140,7 @@ export const projects: Project[] = [
     ],
     outcome:
       "Deployed responsive portfolio showcasing projects, skills, and professional profile.",
-    technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
+    technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "UI Animations"],
     links: {
       github: "https://github.com",
     },
