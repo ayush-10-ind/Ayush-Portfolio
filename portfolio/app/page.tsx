@@ -1,7 +1,4 @@
-// app/page.tsx — Main portfolio page (SPA composition)
-// Composes all sections in correct order.
-// Section components render the full experience.
-
+// app/page.tsx — SPA Root Composition
 import Navigation from "@/components/sections/Navigation";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
@@ -10,15 +7,19 @@ import Experience from "@/components/sections/Experience";
 import Skills from "@/components/sections/Skills";
 import Contact from "@/components/sections/Contact";
 import AssistantPanel from "@/components/assistant/AssistantPanel";
+import CustomCursor from "@/components/ui/CustomCursor";
 
 export default function Home() {
   return (
     <>
-      {/* Fixed navigation — section-aware */}
+      {/* Desktop Custom Cursor */}
+      <CustomCursor />
+
+      {/* Fixed Navigation & Header */}
       <Navigation />
 
-      {/* Main content */}
-      <main id="main-content">
+      {/* Main Content Sections */}
+      <main id="main-content" className="relative">
         <Hero />
         <About />
         <Projects />
@@ -27,7 +28,7 @@ export default function Home() {
         <Contact />
       </main>
 
-      {/* AI Assistant — slide-in panel, does not dominate layout */}
+      {/* Intelligent Assistant Panel */}
       <AssistantPanel />
     </>
   );

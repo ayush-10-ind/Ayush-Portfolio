@@ -1,17 +1,21 @@
 "use client";
-// components/sections/Navigation.tsx
-// Fixed navigation: scroll progress bar, dot section indicators (desktop),
-// full-screen overlay menu (mobile).
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
-const sections = [
-  { id: "hero",       label: "Home",       number: "00" },
-  { id: "about",      label: "About",      number: "01" },
-  { id: "projects",   label: "Work",       number: "02" },
-  { id: "experience", label: "Experience", number: "03" },
-  { id: "skills",     label: "Craft",      number: "04" },
-  { id: "contact",    label: "Contact",    number: "05" },
+interface NavSection {
+  id: string;
+  label: string;
+  number: string;
+}
+
+const sections: NavSection[] = [
+  { id: "hero", label: "Identity", number: "00" },
+  { id: "about", label: "About", number: "01" },
+  { id: "resume-studio", label: "3D Resume", number: "02" },
+  { id: "projects", label: "Case Studies", number: "03" },
+  { id: "experience", label: "Experience", number: "04" },
+  { id: "skills", label: "Craft", number: "05" },
+  { id: "contact", label: "Contact", number: "06" },
 ];
 
 export default function Navigation() {
@@ -19,15 +23,19 @@ export default function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
 
+  // Track scroll progress
   useEffect(() => {
     const handleScroll = () => {
-      const total = document.documentElement.scrollHeight - window.innerHeight;
-      setScrollProgress(total > 0 ? (window.scrollY / total) * 100 : 0);
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalScroll > 0) {
+        setScrollProgress((window.scrollY / totalScroll) * 100);
+      }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Section observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -37,120 +45,198 @@ export default function Navigation() {
           }
         });
       },
-      { threshold: 0.4 }
+      { threshold: 0.3 }
     );
+
     sections.forEach(({ id }) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
+
     return () => observer.disconnect();
   }, []);
 
+  // Keyboard navigation & ESC handler
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Escape" && menuOpen) {
+        setMenuOpen(false);
+      }
+    },
+    [menuOpen]
+  );
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleKeyDown]);
+
   const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    setMenuOpen(false);
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+      setMenuOpen(false);
+    }
   };
 
   return (
     <>
-      {/* Scroll progress line */}
+      {/* Scroll Progress Line */}
       <div
         aria-hidden="true"
+        className="fixed top-0 left-0 h-[2px] bg-[var(--color-accent)] z-50 transition-all duration-75 ease-out"
         style={{ width: `${scrollProgress}%` }}
-        className="fixed top-0 left-0 h-px bg-[var(--color-accent)] z-50 transition-all duration-75"
       />
 
-      {/* Top bar */}
-      <header className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-[var(--gutter)] py-5">
-        <button
-          onClick={() => scrollToSection("hero")}
-          aria-label="Return to top"
-          className="font-mono text-[var(--color-text-primary)] text-sm tracking-widest uppercase hover:text-[var(--color-accent)] transition-colors duration-[var(--dur-fast)]"
-        >
-          AT
-        </button>
-
-        {/* Mobile menu toggle */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={menuOpen}
-          className="tablet:hidden flex flex-col gap-1.5 p-2"
-        >
-          <span
-            className={`block w-6 h-px bg-[var(--color-text-primary)] transition-all duration-[var(--dur-normal)] ${
-              menuOpen ? "rotate-45 translate-y-2" : ""
-            }`}
-          />
-          <span
-            className={`block w-6 h-px bg-[var(--color-text-primary)] transition-all duration-[var(--dur-normal)] ${
-              menuOpen ? "opacity-0" : ""
-            }`}
-          />
-          <span
-            className={`block w-6 h-px bg-[var(--color-text-primary)] transition-all duration-[var(--dur-normal)] ${
-              menuOpen ? "-rotate-45 -translate-y-2" : ""
-            }`}
-          />
-        </button>
-      </header>
-
-      {/* Desktop: vertical dot progress (right edge) */}
-      <nav
-        aria-label="Section navigation"
-        className="hidden tablet:flex fixed right-6 top-1/2 -translate-y-1/2 z-40 flex-col gap-4"
-      >
-        {sections.map(({ id, label, number }) => (
+      {/* Top Header */}
+      <header className="fixed top-0 left-0 right-0 z-40 px-[var(--gutter)] py-4 backdrop-blur-md bg-[#0C0C0C]/80 border-b border-[#2A2A2A]/40 transition-all duration-300">
+        <div className="max-w-[var(--max-width)] mx-auto flex items-center justify-between">
+          {/* Logo & Identity */}
           <button
-            key={id}
-            onClick={() => scrollToSection(id)}
-            aria-label={`Go to ${label}`}
-            aria-current={activeSection === id ? "true" : undefined}
-            className="group flex items-center gap-3 justify-end"
+            onClick={() => scrollToSection("hero")}
+            aria-label="Ayush Trivedi — Return to top"
+            className="group flex items-center gap-3 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded-sm"
           >
-            <span className="font-mono text-[10px] text-[var(--color-text-tertiary)] opacity-0 group-hover:opacity-100 transition-opacity duration-[var(--dur-fast)] tracking-wider">
-              {number}
+            <span className="font-mono text-xs tracking-widest text-[var(--color-accent)] border border-[var(--color-accent)] px-2 py-0.5 group-hover:bg-[var(--color-accent)] group-hover:text-[var(--color-bg)] transition-colors duration-200">
+              AT
             </span>
+            <div className="flex flex-col">
+              <span className="font-display text-sm text-[var(--color-text-primary)] font-medium tracking-wide">
+                Ayush Trivedi
+              </span>
+              <span className="font-mono text-[10px] text-[var(--color-text-tertiary)] uppercase tracking-wider hidden tablet:block">
+                Software Engineer · NIET CSE
+              </span>
+            </div>
+          </button>
+
+          {/* Center / Status */}
+          <div className="hidden laptop:flex items-center gap-2 font-mono text-[11px] text-[var(--color-text-secondary)] border border-[var(--color-border)] px-3 py-1 bg-[#141414]/60">
+            <span className="w-2 h-2 rounded-full bg-[var(--color-success)] animate-pulse" />
+            <span>Open for Software Engineering Internships</span>
+          </div>
+
+          {/* Desktop Right Quick Actions */}
+          <div className="hidden tablet:flex items-center gap-4">
+            <button
+              onClick={() => scrollToSection("projects")}
+              className="font-mono text-xs text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] uppercase tracking-wider transition-colors"
+            >
+              Case Studies
+            </button>
+            <button
+              onClick={() => scrollToSection("contact")}
+              className="font-mono text-xs text-[var(--color-text-primary)] border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] px-3 py-1 uppercase tracking-wider transition-all"
+            >
+              Let&apos;s Talk
+            </button>
+          </div>
+
+          {/* Mobile Hamburger Toggle */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={menuOpen}
+            className="tablet:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+          >
             <span
-              className={`block rounded-full transition-all duration-[var(--dur-normal)] ${
-                activeSection === id
-                  ? "w-2 h-2 bg-[var(--color-accent)]"
-                  : "w-1.5 h-1.5 bg-[var(--color-border)] group-hover:bg-[var(--color-text-tertiary)]"
+              className={`block w-6 h-[1.5px] bg-[var(--color-text-primary)] transition-transform duration-300 ${
+                menuOpen ? "rotate-45 translate-y-2" : ""
+              }`}
+            />
+            <span
+              className={`block w-6 h-[1.5px] bg-[var(--color-text-primary)] transition-opacity duration-300 ${
+                menuOpen ? "opacity-0" : ""
+              }`}
+            />
+            <span
+              className={`block w-6 h-[1.5px] bg-[var(--color-text-primary)] transition-transform duration-300 ${
+                menuOpen ? "-rotate-45 -translate-y-2" : ""
               }`}
             />
           </button>
-        ))}
+        </div>
+      </header>
+
+      {/* Desktop Vertical Dot Navigation (Right Edge) */}
+      <nav
+        aria-label="Page section indicators"
+        className="hidden laptop:flex fixed right-8 top-1/2 -translate-y-1/2 z-40 flex-col gap-5 items-end"
+      >
+        {sections.map(({ id, label, number }) => {
+          const isActive = activeSection === id;
+          return (
+            <button
+              key={id}
+              onClick={() => scrollToSection(id)}
+              aria-label={`Jump to section ${number}: ${label}`}
+              aria-current={isActive ? "true" : undefined}
+              className="group flex items-center gap-3 justify-end focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--color-accent)]"
+            >
+              <span className="font-mono text-[10px] tracking-widest text-[var(--color-text-tertiary)] opacity-0 group-hover:opacity-100 transition-opacity duration-150 uppercase">
+                {number} · {label}
+              </span>
+              <span
+                className={`block rounded-full transition-all duration-300 ${
+                  isActive
+                    ? "w-2.5 h-2.5 bg-[var(--color-accent)] ring-4 ring-[var(--color-accent-subtle)]"
+                    : "w-1.5 h-1.5 bg-[var(--color-border)] group-hover:bg-[var(--color-text-secondary)]"
+                }`}
+              />
+            </button>
+          );
+        })}
       </nav>
 
-      {/* Mobile: full-screen overlay */}
+      {/* Mobile Fullscreen Navigation Overlay */}
       <div
         role="dialog"
-        aria-label="Navigation menu"
+        aria-label="Mobile Navigation Menu"
         aria-modal="true"
-        className={`fixed inset-0 z-30 bg-[var(--color-bg)] flex flex-col items-center justify-center gap-8 transition-all duration-[var(--dur-medium)] tablet:hidden ${
+        className={`fixed inset-0 z-30 bg-[#0C0C0C]/95 backdrop-blur-xl flex flex-col justify-between p-8 pt-24 tablet:hidden transition-all duration-300 ease-out ${
           menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
-        {sections.map(({ id, label, number }) => (
-          <button
-            key={id}
-            onClick={() => scrollToSection(id)}
-            className="group flex items-center gap-4"
+        <div className="flex flex-col gap-6">
+          <p className="font-mono text-[11px] text-[var(--color-text-tertiary)] uppercase tracking-widest border-b border-[var(--color-border)] pb-2">
+            Navigation Index
+          </p>
+          <div className="flex flex-col gap-4">
+            {sections.map(({ id, label, number }) => (
+              <button
+                key={id}
+                onClick={() => scrollToSection(id)}
+                className="group flex items-baseline gap-4 text-left"
+              >
+                <span className="font-mono text-xs text-[var(--color-text-tertiary)] group-hover:text-[var(--color-accent)]">
+                  {number}
+                </span>
+                <span
+                  className={`font-display text-2xl tracking-wide transition-colors duration-150 ${
+                    activeSection === id
+                      ? "text-[var(--color-accent)] italic"
+                      : "text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)]"
+                  }`}
+                >
+                  {label}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile Menu Footer */}
+        <div className="pt-6 border-t border-[var(--color-border)] flex flex-col gap-2">
+          <span className="font-mono text-[11px] text-[var(--color-text-tertiary)]">
+            AYUSH TRIVEDI · NIET GR. NOIDA
+          </span>
+          <a
+            href="mailto:ayushtrivediayushtrivedi2@gmail.com"
+            className="font-mono text-xs text-[var(--color-accent)]"
           >
-            <span className="font-mono text-[var(--color-text-tertiary)] text-sm">
-              {number}
-            </span>
-            <span
-              className={`font-display text-3xl transition-colors duration-[var(--dur-fast)] ${
-                activeSection === id
-                  ? "text-[var(--color-accent)]"
-                  : "text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)]"
-              }`}
-            >
-              {label}
-            </span>
-          </button>
-        ))}
+            ayushtrivediayushtrivedi2@gmail.com
+          </a>
+        </div>
       </div>
     </>
   );
