@@ -1,133 +1,115 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import React from "react";
 import { profile } from "@/lib/data/profile";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 
 export default function Contact() {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <section
       id="contact"
-      aria-label="Direct Contact & Channels"
-      className="py-24 px-[var(--gutter)] bg-[#0A0A0A]"
+      aria-label="Direct Communication & Inquiries"
+      className="py-32 px-[var(--gutter)] bg-[#0C0C0C] relative"
     >
-      <div className="max-w-[var(--max-width)] mx-auto">
+      <div className="max-w-[var(--max-width)] mx-auto space-y-16">
         {/* Section Header */}
         <ScrollReveal direction="up" distance={20}>
-          <div className="flex items-baseline gap-6 mb-16 border-b border-[var(--color-border)] pb-6">
-            <span
-              className="font-display text-[var(--color-accent)] italic text-4xl tablet:text-5xl font-light"
-              aria-hidden="true"
-            >
-              06
-            </span>
-            <div>
-              <span className="font-mono text-xs text-[var(--color-text-tertiary)] uppercase tracking-[0.2em] block mb-1">
-                Communication & Inquiries
-              </span>
-              <h2
-                className="font-display text-[var(--color-text-primary)] font-normal tracking-tight"
-                style={{ fontSize: "var(--text-heading-lg)" }}
+          <div className="flex flex-col tablet:flex-row tablet:items-baseline justify-between gap-4 border-b border-[var(--color-border)] pb-6">
+            <div className="flex items-baseline gap-6">
+              <span
+                className="font-display text-[var(--color-accent)] italic text-4xl tablet:text-5xl font-light"
+                aria-hidden="true"
               >
-                Initiate Contact.
-              </h2>
+                06
+              </span>
+              <div>
+                <span className="font-mono text-xs text-[var(--color-text-tertiary)] uppercase tracking-[0.2em] block mb-1">
+                  Communication Channels
+                </span>
+                <h2
+                  className="font-display text-[var(--color-text-primary)] font-normal tracking-tight"
+                  style={{ fontSize: "var(--text-heading-lg)" }}
+                >
+                  Direct Inquiry.
+                </h2>
+              </div>
             </div>
+
+            <span className="font-mono text-xs text-[var(--color-text-tertiary)] uppercase tracking-widest">
+              GREATER NOIDA · UTC+5:30
+            </span>
           </div>
         </ScrollReveal>
 
-        <div className="grid laptop:grid-cols-12 gap-12 items-start">
-          {/* Left Column: Direct Call to Action */}
-          <ScrollReveal direction="up" distance={20} delay={0.1} className="laptop:col-span-7 space-y-6">
-            <p className="font-body text-base tablet:text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-xl">
-              Available for software engineering internships, technical collaborations, and full-stack development opportunities. Feel free to reach out directly.
-            </p>
+        {/* Contact Layout */}
+        <div className="grid grid-cols-1 laptop:grid-cols-12 gap-12 items-start">
+          {/* Main Direct Action */}
+          <div className="laptop:col-span-7 space-y-6">
+            <h3 className="font-display text-2xl tablet:text-3xl text-[var(--color-text-primary)] font-normal leading-snug">
+              Open for software engineering opportunities, backend development roles, and research collaborations.
+            </h3>
 
-            {/* Large Clickable Email */}
             <div className="pt-4">
               <span className="font-mono text-xs text-[var(--color-text-tertiary)] uppercase tracking-wider block mb-2">
-                Primary Email Channel
-              </span>
-              <motion.a
-                whileHover={shouldReduceMotion ? {} : { x: 4 }}
-                href={`mailto:${profile.email}`}
-                className="font-display text-2xl tablet:text-4xl text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors break-all underline decoration-1 decoration-[var(--color-border)] hover:decoration-[var(--color-accent)] underline-offset-8 inline-block"
-              >
-                {profile.email}
-              </motion.a>
-            </div>
-
-            {/* Direct Phone */}
-            <div className="pt-2">
-              <span className="font-mono text-xs text-[var(--color-text-tertiary)] uppercase tracking-wider block mb-1">
-                Direct Phone
+                Primary Direct Channel:
               </span>
               <a
-                href="tel:+918303155683"
-                className="font-mono text-lg text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
+                href={`mailto:${profile.email}`}
+                className="font-display text-2xl tablet:text-3xl text-[var(--color-accent)] hover:underline break-all"
               >
-                +91 8303155683
+                {profile.email}
               </a>
             </div>
-          </ScrollReveal>
+          </div>
 
-          {/* Right Column: Channel Cards & Verification */}
-          <ScrollReveal direction="up" distance={20} delay={0.2} className="laptop:col-span-5 space-y-4 font-mono text-xs">
-            <div className="border border-[var(--color-border)] p-6 bg-[#141414]/50 space-y-4">
-              <span className="text-[var(--color-text-tertiary)] uppercase tracking-wider block border-b border-[var(--color-border)] pb-2">
-                Professional Channels
+          {/* Detailed Coordinate & Channel Grid */}
+          <div className="laptop:col-span-5 space-y-4 laptop:border-l laptop:border-[var(--color-border)] laptop:pl-10 font-mono text-xs">
+            <div className="border border-[var(--color-border)] p-4 bg-[#121212] drafting-corner space-y-1">
+              <span className="text-[var(--color-text-tertiary)] text-[10px] uppercase">
+                Telephone (India)
               </span>
-
-              <div className="space-y-3">
-                <motion.a
-                  whileHover={shouldReduceMotion ? {} : { x: 4 }}
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3 border border-[var(--color-border)] bg-[#181818] hover:border-[var(--color-accent)] transition-colors group"
-                >
-                  <span className="text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)]">
-                    LinkedIn Profile
-                  </span>
-                  <span className="text-[var(--color-accent)]">↗</span>
-                </motion.a>
-
-                <motion.a
-                  whileHover={shouldReduceMotion ? {} : { x: 4 }}
-                  href="https://github.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3 border border-[var(--color-border)] bg-[#181818] hover:border-[var(--color-accent)] transition-colors group"
-                >
-                  <span className="text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)]">
-                    GitHub Repositories
-                  </span>
-                  <span className="text-[var(--color-accent)]">↗</span>
-                </motion.a>
+              <div className="text-[var(--color-text-primary)] text-sm">
+                +91 8303155683
               </div>
             </div>
 
-            <div className="border border-[var(--color-border)] p-6 bg-[#141414]/50 space-y-2">
-              <div className="flex justify-between text-[11px]">
-                <span className="text-[var(--color-text-tertiary)]">Location:</span>
-                <span className="text-[var(--color-text-primary)]">{profile.location}</span>
-              </div>
-              <div className="flex justify-between text-[11px]">
-                <span className="text-[var(--color-text-tertiary)]">Status:</span>
-                <span className="text-[var(--color-success)]">{profile.availability}</span>
+            <div className="border border-[var(--color-border)] p-4 bg-[#121212] drafting-corner space-y-1">
+              <span className="text-[var(--color-text-tertiary)] text-[10px] uppercase">
+                Geographic Location
+              </span>
+              <div className="text-[var(--color-text-primary)] text-sm">
+                {profile.location}
               </div>
             </div>
-          </ScrollReveal>
+
+            <div className="grid grid-cols-2 gap-4 pt-2">
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-[var(--color-border)] p-3 bg-[#121212] text-center hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors uppercase tracking-wider"
+              >
+                GitHub ↗
+              </a>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-[var(--color-border)] p-3 bg-[#121212] text-center hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors uppercase tracking-wider"
+              >
+                LinkedIn ↗
+              </a>
+            </div>
+          </div>
         </div>
 
-        {/* Bottom Editorial Footer */}
-        <div className="mt-20 pt-8 border-t border-[var(--color-border)] flex flex-col tablet:flex-row justify-between items-start tablet:items-center gap-4 font-mono text-[11px] text-[var(--color-text-tertiary)]">
+        {/* Architectural Footer */}
+        <div className="border-t border-[var(--color-border)] pt-8 flex flex-col tablet:flex-row justify-between items-center gap-4 font-mono text-xs text-[var(--color-text-tertiary)]">
           <div>
-            <span>AYUSH TRIVEDI · COMPUTER SCIENCE & ENGINEERING</span>
+            © {new Date().getFullYear()} AYUSH TRIVEDI · ARCHITECTURAL STUDIO
           </div>
           <div>
-            <span>ALL RIGHTS RESERVED © {new Date().getFullYear()}</span>
+            NIET GREATER NOIDA · CSE &apos;28
           </div>
         </div>
       </div>

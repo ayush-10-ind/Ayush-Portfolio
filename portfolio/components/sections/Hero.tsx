@@ -1,113 +1,190 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import { profile } from "@/lib/data/profile";
-import MaskedTextReveal from "@/components/animations/MaskedTextReveal";
-import ScrollReveal from "@/components/animations/ScrollReveal";
+import React from "react";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
 
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: shouldReduceMotion ? 0 : 0.12,
+        delayChildren: shouldReduceMotion ? 0 : 0.1,
+      },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 24 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
+
+  const lineVariants: Variants = {
+    hidden: { scaleX: 0 },
+    visible: {
+      scaleX: 1,
+      transition: { duration: 1.1, ease: "easeOut" },
+    },
   };
 
   return (
     <section
       id="hero"
-      aria-label="Introduction and Identity"
-      className="relative min-h-[92vh] flex flex-col justify-between pt-28 pb-12 px-[var(--gutter)] border-b border-[var(--color-border)]"
+      aria-label="Introduction & Studio Overview"
+      className="relative min-h-[92vh] flex flex-col justify-between pt-32 pb-16 px-[var(--gutter)] border-b border-[var(--color-border)] architectural-grid overflow-hidden"
     >
-      {/* Top Architectural Drafting Metadata Grid */}
-      <ScrollReveal direction="down" distance={16} duration={0.6}>
-        <div className="max-w-[var(--max-width)] mx-auto w-full grid grid-cols-2 laptop:grid-cols-4 gap-4 font-mono text-[11px] text-[var(--color-text-tertiary)] border-b border-[var(--color-border)] pb-6 tracking-wider">
-          <div className="transition-colors duration-200 hover:text-[var(--color-text-primary)]">
-            <span className="block text-[var(--color-text-secondary)] uppercase">Profile / Identity</span>
-            <span>Ayush Trivedi</span>
-          </div>
-          <div className="transition-colors duration-200 hover:text-[var(--color-text-primary)]">
-            <span className="block text-[var(--color-text-secondary)] uppercase">Academic Standing</span>
-            <span>NIET Gr. Noida · 8.4 CGPA</span>
-          </div>
-          <div className="transition-colors duration-200 hover:text-[var(--color-text-primary)]">
-            <span className="block text-[var(--color-text-secondary)] uppercase">Primary Focus</span>
-            <span>Java · Python · XAI · Full-Stack</span>
-          </div>
-          <div className="text-right tablet:text-left transition-colors duration-200 hover:text-[var(--color-text-primary)]">
-            <span className="block text-[var(--color-text-secondary)] uppercase">Location</span>
-            <span>Gr. Noida, India</span>
-          </div>
-        </div>
-      </ScrollReveal>
+      {/* Ambient Radial Studio Glow */}
+      <div
+        aria-hidden="true"
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] tablet:w-[900px] h-[400px] bg-[radial-gradient(circle_at_center,rgba(212,168,83,0.05)_0%,transparent_70%)] pointer-events-none"
+      />
 
-      {/* Main Editorial Display Name & Headline */}
-      <div className="max-w-[var(--max-width)] mx-auto w-full my-auto py-12">
-        <ScrollReveal delay={0.1} direction="up" distance={16}>
-          <div className="inline-flex items-center gap-2 font-mono text-xs text-[var(--color-accent)] uppercase tracking-[0.2em] mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] animate-pulse" />
-            <span>Software Engineer & Computer Science Student</span>
-          </div>
-        </ScrollReveal>
-
-        <h1
-          className="font-display text-[var(--color-text-primary)] font-normal leading-[0.92] tracking-tight mb-8"
-          style={{ fontSize: "var(--text-display-xl)" }}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="max-w-[var(--max-width)] mx-auto w-full flex-1 flex flex-col justify-between space-y-16"
+      >
+        {/* Top Exhibition Metadata Strip */}
+        <motion.div
+          variants={itemVariants}
+          className="flex flex-col tablet:flex-row tablet:items-center justify-between gap-4 font-mono text-[11px] text-[var(--color-text-tertiary)] border-b border-[var(--color-border)] pb-4 tracking-widest uppercase"
         >
-          <MaskedTextReveal text="Ayush" delay={0.15} as="span" className="block" />
-          <MaskedTextReveal
-            text="Trivedi."
-            delay={0.25}
-            as="span"
-            className="block text-[var(--color-text-secondary)] italic tablet:pl-[8vw]"
-          />
-        </h1>
+          <div className="flex items-center gap-3">
+            <span className="text-[var(--color-accent)] font-medium">INDEX 00 / OPENING</span>
+            <span className="text-[var(--color-border)]">|</span>
+            <span>DIGITAL ARCHITECTURAL STUDIO</span>
+          </div>
 
-        <div className="grid tablet:grid-cols-12 gap-6 items-end">
-          <ScrollReveal delay={0.35} direction="up" distance={20} className="tablet:col-span-8">
-            <p
-              className="font-body text-[var(--color-text-secondary)] leading-relaxed max-w-2xl"
-              style={{ fontSize: "var(--text-body-lg)" }}
-            >
-              {profile.bio}
-            </p>
-          </ScrollReveal>
-
-          {/* Action CTAs with smooth tactile hover */}
-          <ScrollReveal delay={0.45} direction="up" distance={20} className="tablet:col-span-4 flex flex-wrap tablet:flex-col items-start gap-3 pt-4 tablet:pt-0">
-            <motion.button
-              whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
-              whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
-              onClick={() => scrollTo("projects")}
-              className="font-mono text-xs text-[var(--color-bg)] bg-[var(--color-accent)] hover:bg-[var(--color-text-primary)] px-5 py-3 tracking-widest uppercase font-medium transition-colors duration-200"
-            >
-              Explore Case Studies ↓
-            </motion.button>
-            <motion.button
-              whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
-              whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
-              onClick={() => scrollTo("contact")}
-              className="font-mono text-xs text-[var(--color-text-primary)] border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] px-5 py-3 tracking-widest uppercase transition-colors duration-200"
-            >
-              Direct Contact →
-            </motion.button>
-          </ScrollReveal>
-        </div>
-      </div>
-
-      {/* Bottom Drafting Annotation Strip */}
-      <ScrollReveal direction="up" distance={12} delay={0.5}>
-        <div className="max-w-[var(--max-width)] mx-auto w-full flex flex-col tablet:flex-row justify-between items-start tablet:items-center gap-4 pt-6 border-t border-[var(--color-border)] font-mono text-[11px] text-[var(--color-text-tertiary)]">
           <div className="flex items-center gap-4">
-            <span>COORDINATES: 28.4744° N, 77.5040° E</span>
-            <span className="hidden tablet:inline">·</span>
-            <span className="hidden tablet:inline">SPEC: V2.3 (AGNIPRESS + XAI)</span>
+            <span>COORD: 28.4744° N · 77.5040° E</span>
+            <span className="hidden tablet:inline text-[var(--color-border)]">|</span>
+            <span className="text-[var(--color-text-secondary)] hidden tablet:inline">
+              GREATER NOIDA, INDIA
+            </span>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]" />
-            <span>SCROLL TO EXPLORE WORK</span>
+        </motion.div>
+
+        {/* Hero Title & Identity Presentation */}
+        <div className="grid grid-cols-1 laptop:grid-cols-12 gap-8 items-end">
+          {/* Main Display Headline with Masked Reveal */}
+          <div className="laptop:col-span-8 space-y-4">
+            <div className="overflow-hidden">
+              <motion.h1
+                variants={itemVariants}
+                className="font-display text-[var(--text-display-xl)] text-[var(--color-text-primary)] font-normal tracking-tight leading-[0.95]"
+              >
+                Ayush
+                <br />
+                <span className="text-[var(--color-text-primary)]">Trivedi</span>
+                <span className="text-[var(--color-accent)]">.</span>
+              </motion.h1>
+            </div>
+
+            <motion.div variants={itemVariants} className="pt-2">
+              <span className="font-mono text-xs tablet:text-sm text-[var(--color-accent)] uppercase tracking-[0.25em] block">
+                Software Engineer · CS Undergraduate (NIET &apos;28)
+              </span>
+            </motion.div>
           </div>
+
+          {/* Asymmetric Technical Abstract */}
+          <motion.div
+            variants={itemVariants}
+            className="laptop:col-span-4 space-y-6 laptop:border-l laptop:border-[var(--color-border)] laptop:pl-8"
+          >
+            <p className="font-body text-sm tablet:text-base text-[var(--color-text-secondary)] leading-relaxed">
+              Engineering deterministic full-stack web platforms, backend systems in Java &amp; Spring Boot, and analytical research in Explainable AI (XAI) interpretability.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <a
+                href="#resume-studio"
+                className="font-mono text-xs uppercase tracking-wider px-5 py-3 border border-[var(--color-accent)] bg-[var(--color-accent)] text-[#0A0A0A] font-medium hover:bg-transparent hover:text-[var(--color-accent)] transition-colors duration-200"
+              >
+                3D Resume Studio ↓
+              </a>
+
+              <a
+                href="#case-studies"
+                className="font-mono text-xs uppercase tracking-wider px-5 py-3 border border-[var(--color-border)] bg-[#121212] text-[var(--color-text-primary)] hover:border-[var(--color-text-tertiary)] transition-colors duration-200"
+              >
+                Case Studies ↓
+              </a>
+            </div>
+          </motion.div>
         </div>
-      </ScrollReveal>
+
+        {/* Architectural Metadata Grid with Corner Ticks */}
+        <motion.div
+          variants={itemVariants}
+          className="grid grid-cols-2 tablet:grid-cols-4 gap-4 tablet:gap-6 border-t border-[var(--color-border)] pt-8 font-mono text-xs"
+        >
+          <div className="border border-[var(--color-border)] p-4 bg-[#121212]/80 drafting-corner space-y-1">
+            <span className="text-[var(--color-text-tertiary)] text-[10px] uppercase tracking-wider block">
+              ACADEMIC STANDING
+            </span>
+            <div className="text-[var(--color-text-primary)] text-sm font-medium">
+              8.4 CGPA
+            </div>
+            <span className="text-[var(--color-text-tertiary)] text-[10px] block">
+              NIET Greater Noida · CSE
+            </span>
+          </div>
+
+          <div className="border border-[var(--color-border)] p-4 bg-[#121212]/80 drafting-corner space-y-1">
+            <span className="text-[var(--color-text-tertiary)] text-[10px] uppercase tracking-wider block">
+              CORE DISCIPLINES
+            </span>
+            <div className="text-[var(--color-text-primary)] text-sm font-medium">
+              Java &amp; Python
+            </div>
+            <span className="text-[var(--color-text-tertiary)] text-[10px] block">
+              Spring Boot 3 · JPA · XAI
+            </span>
+          </div>
+
+          <div className="border border-[var(--color-border)] p-4 bg-[#121212]/80 drafting-corner space-y-1">
+            <span className="text-[var(--color-text-tertiary)] text-[10px] uppercase tracking-wider block">
+              FLAGSHIP WORK
+            </span>
+            <div className="text-[var(--color-text-primary)] text-sm font-medium">
+              AgniPress &amp; XAI
+            </div>
+            <span className="text-[var(--color-text-tertiary)] text-[10px] block">
+              2 Verified Case Studies
+            </span>
+          </div>
+
+          <div className="border border-[var(--color-border)] p-4 bg-[#121212]/80 drafting-corner space-y-1">
+            <span className="text-[var(--color-text-tertiary)] text-[10px] uppercase tracking-wider block">
+              AVAILABILITY
+            </span>
+            <div className="text-[var(--color-accent)] text-sm font-medium flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-success)] animate-pulse" />
+              <span>Seeking Roles</span>
+            </div>
+            <span className="text-[var(--color-text-tertiary)] text-[10px] block">
+              SWE &amp; Backend Internships
+            </span>
+          </div>
+        </motion.div>
+      </motion.div>
+
+      {/* Decorative Bottom Guide Rule */}
+      <motion.div
+        variants={lineVariants}
+        initial="hidden"
+        animate="visible"
+        className="w-full h-[1px] bg-[var(--color-border)] absolute bottom-0 left-0 origin-left"
+      />
     </section>
   );
 }

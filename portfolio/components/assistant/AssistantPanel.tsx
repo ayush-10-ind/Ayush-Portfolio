@@ -7,10 +7,10 @@ import AssistantResponse from "./AssistantResponse";
 
 const SUGGESTED_QUERIES = [
   "What is AgniPress and how does the backend work?",
-  "Why did Ayush choose Java for his projects?",
-  "Tell me about the Explainable AI research project.",
+  "Why did Ayush choose Java for his systems engineering?",
+  "Explain his Explainable AI research on model interpretability.",
   "What did Ayush build during his AICTE internship?",
-  "What is his academic GPA and university?",
+  "What is his academic standing and university?",
 ];
 
 export default function AssistantPanel() {
@@ -101,47 +101,50 @@ export default function AssistantPanel() {
 
   return (
     <>
-      {/* Floating Trigger Button in Editorial Style */}
-      <button
-        onClick={() => setIsOpen(true)}
-        aria-label="Open portfolio assistant dialog"
-        aria-expanded={isOpen}
-        className={`fixed bottom-6 right-6 z-40 font-mono text-xs tracking-widest uppercase px-4 py-2.5 border transition-all duration-200 shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] ${
-          isOpen
-            ? "opacity-0 pointer-events-none"
-            : "opacity-100 bg-[#121212] border-[var(--color-accent)] text-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)]"
-        }`}
-      >
-        Ask Assistant ↗
-      </button>
+      {/* Editorial Fixed Control Strip in Bottom Right */}
+      <div className="fixed bottom-6 right-6 z-40">
+        <button
+          onClick={() => setIsOpen(true)}
+          aria-label="Open portfolio research assistant"
+          aria-expanded={isOpen}
+          className={`font-mono text-xs tracking-widest uppercase px-5 py-3 border transition-all duration-200 shadow-2xl flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] ${
+            isOpen
+              ? "opacity-0 pointer-events-none"
+              : "opacity-100 bg-[#121212] border-[var(--color-accent)] text-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-[#0A0A0A]"
+          }`}
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]" />
+          <span>RESEARCH ARCHIVE · ASK ABOUT MY WORK ↗</span>
+        </button>
+      </div>
 
-      {/* Slide-In Editorial Panel */}
+      {/* Slide-In Architectural Research Panel */}
       <div
         ref={panelRef}
         role="dialog"
-        aria-label="Portfolio AI Assistant"
+        aria-label="Portfolio Research Assistant"
         aria-modal="true"
-        className={`fixed inset-y-0 right-0 z-50 flex flex-col w-full tablet:w-[480px] bg-[#0C0C0C] border-l border-[var(--color-border)] shadow-2xl transition-transform duration-300 ease-out ${
+        className={`fixed inset-y-0 right-0 z-50 flex flex-col w-full tablet:w-[500px] bg-[#0A0A0A] border-l border-[var(--color-border)] shadow-2xl transition-transform duration-300 ease-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         {/* Panel Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--color-border)] bg-[#101010]">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-[var(--color-border)] bg-[#101010]">
           <div>
             <div className="flex items-center gap-2 font-mono text-[10px] text-[var(--color-accent)] uppercase tracking-widest">
               <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-success)]" />
-              <span>Grounded Portfolio Assistant</span>
+              <span>Grounded Knowledge System</span>
             </div>
             <h3 className="font-display text-base text-[var(--color-text-primary)] font-normal">
-              Ayush Trivedi Knowledge System
+              Ayush Trivedi Research Archive
             </h3>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             {messages.length > 0 && (
               <button
                 onClick={clearChat}
-                aria-label="Clear chat history"
+                aria-label="Clear discussion"
                 className="font-mono text-[10px] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-primary)] uppercase px-2 py-1 transition-colors"
               >
                 Clear
@@ -157,25 +160,25 @@ export default function AssistantPanel() {
           </div>
         </div>
 
-        {/* Message Stream Area */}
+        {/* Message Stream Body */}
         <div
           aria-live="polite"
-          className="flex-1 overflow-y-auto p-6 space-y-6 bg-[#0E0E0E]"
+          className="flex-1 overflow-y-auto p-6 space-y-6 bg-[#0C0C0C] architectural-grid"
         >
           {messages.length === 0 && (
             <div className="space-y-6">
-              <div className="p-4 border border-[var(--color-border)] bg-[#141414]/50 space-y-2">
+              <div className="p-5 border border-[var(--color-border)] bg-[#121212] drafting-corner space-y-2">
                 <span className="font-mono text-[11px] text-[var(--color-accent)] uppercase tracking-wider block">
-                  Natural Language Q&A
+                  Natural Language Inquiries
                 </span>
                 <p className="font-body text-xs text-[var(--color-text-secondary)] leading-relaxed">
-                  Ask natural questions regarding Ayush&apos;s engineering background, projects (AgniPress & Explainable AI), technical decisions, internship at AICTE, or skills.
+                  Directly inquire about Ayush&apos;s verified background, engineering decisions (Java vs. Python), AgniPress architecture, Explainable AI research, or AICTE internship responsibilities.
                 </p>
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-2.5">
                 <span className="font-mono text-[10px] text-[var(--color-text-tertiary)] uppercase tracking-wider block">
-                  Sample Inquiries:
+                  Suggested Architectural Inquiries:
                 </span>
                 <div className="space-y-2">
                   {SUGGESTED_QUERIES.map((query, qIdx) => (
@@ -201,11 +204,11 @@ export default function AssistantPanel() {
           {isLoading && (
             <div className="flex items-center gap-2 font-mono text-xs text-[var(--color-accent)] p-2">
               <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] animate-ping" />
-              <span>Synthesizing verified response...</span>
+              <span>Retrieving verified portfolio records...</span>
             </div>
           )}
 
-          {/* Error Message */}
+          {/* Error Banner */}
           {error && (
             <div
               role="alert"
@@ -227,7 +230,7 @@ export default function AssistantPanel() {
         <div
           onClick={() => setIsOpen(false)}
           aria-hidden="true"
-          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm tablet:hidden"
+          className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm tablet:hidden"
         />
       )}
     </>

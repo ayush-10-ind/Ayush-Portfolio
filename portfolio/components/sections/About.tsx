@@ -1,156 +1,114 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import { profile } from "@/lib/data/profile";
-import { educationList } from "@/lib/data/experience";
+import React from "react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
-import StaggerContainer, { StaggerItem } from "@/components/animations/StaggerContainer";
 
 export default function About() {
-  const btech = educationList[0];
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <section
       id="about"
-      aria-label="About Ayush Trivedi"
-      className="py-24 px-[var(--gutter)] border-b border-[var(--color-border)]"
+      aria-label="About & Philosophy"
+      className="py-28 px-[var(--gutter)] border-b border-[var(--color-border)] bg-[#0C0C0C] relative"
     >
-      <div className="max-w-[var(--max-width)] mx-auto">
+      <div className="max-w-[var(--max-width)] mx-auto space-y-16">
         {/* Section Header */}
         <ScrollReveal direction="up" distance={20}>
-          <div className="flex items-baseline gap-6 mb-16 border-b border-[var(--color-border)] pb-6">
-            <span
-              className="font-display text-[var(--color-accent)] italic text-4xl tablet:text-5xl font-light"
-              aria-hidden="true"
-            >
-              01
-            </span>
-            <div>
-              <span className="font-mono text-xs text-[var(--color-text-tertiary)] uppercase tracking-[0.2em] block mb-1">
-                Background & Engineering Focus
-              </span>
-              <h2
-                className="font-display text-[var(--color-text-primary)] font-normal tracking-tight"
-                style={{ fontSize: "var(--text-heading-lg)" }}
+          <div className="flex flex-col tablet:flex-row tablet:items-baseline justify-between gap-4 border-b border-[var(--color-border)] pb-6">
+            <div className="flex items-baseline gap-6">
+              <span
+                className="font-display text-[var(--color-accent)] italic text-4xl tablet:text-5xl font-light"
+                aria-hidden="true"
               >
-                Engineering Narrative.
-              </h2>
+                01
+              </span>
+              <div>
+                <span className="font-mono text-xs text-[var(--color-text-tertiary)] uppercase tracking-[0.2em] block mb-1">
+                  Background &amp; Discipline
+                </span>
+                <h2
+                  className="font-display text-[var(--color-text-primary)] font-normal tracking-tight"
+                  style={{ fontSize: "var(--text-heading-lg)" }}
+                >
+                  Architectural Mindset.
+                </h2>
+              </div>
             </div>
+
+            <span className="font-mono text-xs text-[var(--color-text-tertiary)] uppercase tracking-widest">
+              SYSTEMS · DATA · ATHLETICS
+            </span>
           </div>
         </ScrollReveal>
 
-        {/* 2-Column Editorial Grid */}
-        <div className="grid laptop:grid-cols-12 gap-12 items-start">
-          {/* Left Column: Narrative with Scroll Reveals */}
-          <div className="laptop:col-span-7 space-y-8">
+        {/* Asymmetric Narrative Grid */}
+        <div className="grid grid-cols-1 laptop:grid-cols-12 gap-12 items-start">
+          {/* Left Column: Big Philosophy Statement */}
+          <div className="laptop:col-span-5 space-y-6">
             <ScrollReveal direction="up" distance={20} delay={0.1}>
-              <p
-                className="font-body text-[var(--color-text-primary)] leading-relaxed"
-                style={{ fontSize: "var(--text-body-lg)" }}
-              >
-                I am a Computer Science and Engineering student at{" "}
-                <strong className="text-[var(--color-accent)] font-medium">
-                  Noida Institute of Engineering and Technology (NIET, Gr. Noida)
-                </strong>
-                , maintaining an <strong className="text-[var(--color-text-primary)] font-medium">8.4 CGPA</strong>.
-                My work spans full-stack web systems in Java & Spring Boot, machine learning research in Explainable AI (XAI), and foundational algorithms.
+              <h3 className="font-display text-2xl tablet:text-3xl text-[var(--color-text-primary)] font-normal leading-snug">
+                Building resilient software by pairing rigorous backend architecture with transparent analytical reasoning.
+              </h3>
+            </ScrollReveal>
+
+            <ScrollReveal direction="up" distance={20} delay={0.15}>
+              <p className="font-body text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                Currently pursuing a B.Tech in Computer Science and Engineering at Noida Institute of Engineering and Technology (NIET, Greater Noida) with a verified 8.4 CGPA.
               </p>
-            </ScrollReveal>
-
-            <ScrollReveal direction="up" distance={20} delay={0.2}>
-              <div className="space-y-3 pt-2">
-                <h3 className="font-display text-xl text-[var(--color-text-primary)] font-normal">
-                  Algorithmic Problem Solving & Continuous Learning
-                </h3>
-                <p className="font-body text-[var(--color-text-secondary)] leading-relaxed text-sm tablet:text-base">
-                  Engineering software begins with foundational data structures and deterministic algorithmic reasoning.
-                  I actively solve Data Structures and Algorithms (DSA) challenges on LeetCode, participate in competitive programming, and attend technical workshops to deepen my computational velocity and debugging rigor.
-                </p>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal direction="up" distance={20} delay={0.3}>
-              <div className="space-y-3 pt-2">
-                <h3 className="font-display text-xl text-[var(--color-text-primary)] font-normal">
-                  Discipline On & Off the Pitch
-                </h3>
-                <p className="font-body text-[var(--color-text-secondary)] leading-relaxed text-sm tablet:text-base">
-                  Beyond code, I am an active football player. Competitive athletics demands clear on-field communication, collective tactical discipline, and adaptability under pressure—principles that translate directly to collaborative software development and high-ownership engineering.
-                </p>
-              </div>
             </ScrollReveal>
           </div>
 
-          {/* Right Column: Architectural Fact Cards with Staggered Entrance */}
-          <div className="laptop:col-span-5 space-y-4 font-mono text-xs">
-            <StaggerContainer staggerDelay={0.1} delayChildren={0.2}>
-              <StaggerItem>
-                <motion.div
-                  whileHover={shouldReduceMotion ? {} : { y: -2 }}
-                  className="border border-[var(--color-border)] p-6 bg-[#141414]/50 space-y-4 transition-colors duration-200 hover:border-[var(--color-accent)]"
-                >
-                  <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-3">
-                    <span className="text-[var(--color-text-tertiary)] uppercase tracking-wider">
-                      Academic Degree
-                    </span>
-                    <span className="text-[var(--color-accent)] font-medium">
-                      {btech.grade}
-                    </span>
-                  </div>
-                  <div>
-                    <span className="text-[var(--color-text-primary)] block font-medium">
-                      {btech.degree}
-                    </span>
-                    <span className="text-[var(--color-text-secondary)] text-[11px] block mt-1">
-                      {btech.institution} · {btech.period}
-                    </span>
-                  </div>
-                </motion.div>
-              </StaggerItem>
-
-              <StaggerItem>
-                <motion.div
-                  whileHover={shouldReduceMotion ? {} : { y: -2 }}
-                  className="border border-[var(--color-border)] p-6 bg-[#141414]/50 space-y-3 transition-colors duration-200 hover:border-[var(--color-accent)] mt-4"
-                >
-                  <span className="text-[var(--color-text-tertiary)] uppercase tracking-wider block border-b border-[var(--color-border)] pb-2">
-                    Core Competencies
+          {/* Right Column: Detailed Architectural Pillars */}
+          <div className="laptop:col-span-7 space-y-8 laptop:border-l laptop:border-[var(--color-border)] laptop:pl-12">
+            {/* Pillar 1: Backend Systems */}
+            <ScrollReveal direction="up" distance={20} delay={0.2}>
+              <div className="border border-[var(--color-border)] p-6 bg-[#141414] drafting-corner space-y-3">
+                <div className="flex justify-between items-baseline">
+                  <h4 className="font-display text-lg text-[var(--color-text-primary)] font-medium">
+                    Full-Stack &amp; Enterprise Backend
+                  </h4>
+                  <span className="font-mono text-xs text-[var(--color-accent)] uppercase">
+                    Java 21 · Spring Boot 3
                   </span>
-                  <div className="flex flex-wrap gap-2 pt-1">
-                    {["Java (Core & OOP)", "Python", "JavaScript", "React.js", "Spring Boot", "Oracle DBMS", "Git / GitHub", "DSA / LeetCode"].map((skill) => (
-                      <span
-                        key={skill}
-                        className="border border-[var(--color-border)] bg-[#1C1C1C] text-[var(--color-text-secondary)] px-2.5 py-1 text-[11px]"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-              </StaggerItem>
+                </div>
+                <p className="font-body text-xs tablet:text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                  Focusing on statically typed backend design, relational database modeling (Oracle/MySQL), declarative transaction boundaries with Spring Data JPA, and secure OAuth2 authentication filter chains.
+                </p>
+              </div>
+            </ScrollReveal>
 
-              <StaggerItem>
-                <motion.div
-                  whileHover={shouldReduceMotion ? {} : { y: -2 }}
-                  className="border border-[var(--color-border)] p-6 bg-[#141414]/50 space-y-3 transition-colors duration-200 hover:border-[var(--color-accent)] mt-4"
-                >
-                  <span className="text-[var(--color-text-tertiary)] uppercase tracking-wider block border-b border-[var(--color-border)] pb-2">
-                    Location & Availability
+            {/* Pillar 2: Machine Learning & XAI */}
+            <ScrollReveal direction="up" distance={20} delay={0.25}>
+              <div className="border border-[var(--color-border)] p-6 bg-[#141414] drafting-corner space-y-3">
+                <div className="flex justify-between items-baseline">
+                  <h4 className="font-display text-lg text-[var(--color-text-primary)] font-medium">
+                    Explainable AI Research
+                  </h4>
+                  <span className="font-mono text-xs text-[var(--color-accent)] uppercase">
+                    Python · Interpretability
                   </span>
-                  <div className="space-y-1">
-                    <div className="flex justify-between text-[11px]">
-                      <span className="text-[var(--color-text-tertiary)]">Location:</span>
-                      <span className="text-[var(--color-text-primary)]">{profile.location}</span>
-                    </div>
-                    <div className="flex justify-between text-[11px]">
-                      <span className="text-[var(--color-text-tertiary)]">Objective:</span>
-                      <span className="text-[var(--color-accent)]">Open for Software Internships</span>
-                    </div>
-                  </div>
-                </motion.div>
-              </StaggerItem>
-            </StaggerContainer>
+                </div>
+                <p className="font-body text-xs tablet:text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                  Investigating model interpretability mechanisms, post-hoc feature attribution algorithms, and decision auditing pipelines in Python to transform black-box machine learning predictions into human-verifiable explanations.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            {/* Pillar 3: Athletics & Problem Solving */}
+            <ScrollReveal direction="up" distance={20} delay={0.3}>
+              <div className="border border-[var(--color-border)] p-6 bg-[#141414] drafting-corner space-y-3">
+                <div className="flex justify-between items-baseline">
+                  <h4 className="font-display text-lg text-[var(--color-text-primary)] font-medium">
+                    Physical Discipline &amp; Algorithms
+                  </h4>
+                  <span className="font-mono text-xs text-[var(--color-accent)] uppercase">
+                    Football · LeetCode DSA
+                  </span>
+                </div>
+                <p className="font-body text-xs tablet:text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                  Active competitive football player cultivating tactical discipline, collective decision-making under pressure, and daily algorithmic problem-solving on LeetCode.
+                </p>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </div>
