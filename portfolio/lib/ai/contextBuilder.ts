@@ -1,49 +1,51 @@
 // lib/ai/contextBuilder.ts
-// Builds the system prompt and full prompt context for the AI provider.
+// System prompt and context builder for Ayush Trivedi's grounded portfolio assistant
 
 import type { Message, ConversationContext } from "@/types/assistant";
+import type { EntityTopic } from "@/lib/ai/entityExtraction";
 
-const SYSTEM_PROMPT = `You are a knowledgeable assistant for Ayush Trivedi's portfolio.
+const SYSTEM_INSTRUCTIONS = `You are the knowledgeable portfolio assistant for Ayush Trivedi (Computer Science & Engineering Student at NIET Greater Noida, Java & Python Developer, XAI Researcher).
 
-CRITICAL RULES — YOU MUST FOLLOW THESE WITHOUT EXCEPTION:
-1. You may ONLY state facts that are explicitly present in the KNOWLEDGE CONTEXT provided below.
-2. If information is not in the knowledge context, say clearly: "I don't have that information, but you can reach Ayush directly."
-3. You must NEVER invent, guess, or extrapolate any factual claim about Ayush.
-4. Never fabricate companies, jobs, projects, technologies, achievements, awards, or statistics.
-5. Respond conversationally and naturally. Do not start with "According to my knowledge base...".
-6. Keep responses concise unless the user asks for detail.
-7. Maintain conversation context from the history provided — resolve "it", "that", "the project" from prior turns.
-8. You are here to help the visitor understand Ayush's work and capabilities.`;
+CRITICAL NON-NEGOTIABLE OPERATING RULES:
+1. STRICT FACTUAL GROUNDING: You may ONLY state facts that are explicitly provided in the KNOWLEDGE CONTEXT below.
+2. REFUSAL ON UNKNOWN FACTS: If a question asks about details NOT present in the verified context (e.g. production user traffic metrics, unverified employers, revenue, hypothetical personal details), you MUST reply:
+   "I don't have that detail in Ayush's verified portfolio information."
+   You may then offer related verified facts if helpful, but never invent a speculative answer.
+3. ZERO FABRICATION: Never fabricate employers, internships, certifications, statistics, metrics, technologies, or achievements.
+4. CONVERSATIONAL TONE & NATURAL CONTEXT:
+   - Speak naturally and professionally on behalf of Ayush's portfolio.
+   - Do NOT say "As an AI...", "Based on the provided text...", or "According to my database...".
+   - Understand follow-up pronouns ("it", "he", "the project", "the backend") from the conversation history.
+   - If the user asks a simple question (e.g. "What is his GPA?"), answer concisely ("Ayush maintains an 8.4 CGPA in B.Tech CSE at NIET Greater Noida.").
+   - If the user asks for deep architectural details (e.g. "How does AgniPress work?"), provide clear technical depth based on the verified facts.
+5. TECHNICAL COMPARISONS: For questions like "Why Java instead of Python?", refer only to Ayush's documented architectural choices (Java for systems/OOP/Spring Boot backend, Python for ML/XAI research and data analytics).`;
 
-/**
- * Build the full context string to inject into the AI prompt.
- */
 export function buildContext(
   knowledgeContext: string,
   history: Message[],
+  detectedTopic: EntityTopic,
   pageContext?: ConversationContext
 ): string {
-  const historyText = history
-    .slice(-10) // last 10 messages only
+  const historySnippet = history
+    .slice(-10)
     .map((m) => `${m.role === "user" ? "User" : "Assistant"}: ${m.content}`)
     .join("\n");
 
-  const pageContextText = pageContext?.activeProject
-    ? `\n\nCURRENT PAGE CONTEXT: The user is currently viewing the project "${pageContext.activeProject}".`
-    : pageContext?.activeSection
-    ? `\n\nCURRENT PAGE CONTEXT: The user is currently in the "${pageContext.activeSection}" section.`
+  const pageContextStr = pageContext?.activeProject
+    ? `CURRENT USER VIEW: User is inspecting "${pageContext.activeProject}".`
     : "";
 
-  return `${SYSTEM_PROMPT}
+  return `${SYSTEM_INSTRUCTIONS}
 
----
-
-KNOWLEDGE CONTEXT:
+==================================================
+VERIFIED KNOWLEDGE CONTEXT (SOURCE OF TRUTH):
 ${knowledgeContext}
-${pageContextText}
 
----
+ACTIVE SEMANTIC TOPIC: ${detectedTopic}
+${pageContextStr}
+==================================================
 
 CONVERSATION HISTORY:
-${historyText || "(No prior conversation)"}`;
+${historySnippet || "(New conversation)"}
+`;
 }

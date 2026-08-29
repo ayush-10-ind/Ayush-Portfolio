@@ -1,18 +1,16 @@
 "use client";
-// components/assistant/AssistantPanel.tsx
-// AI assistant slide-in panel. Integrated into portfolio visual language.
-// NOT a generic chatbot bubble.
 
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import type { Message, ConversationContext } from "@/types/assistant";
 import AssistantInput from "./AssistantInput";
 import AssistantResponse from "./AssistantResponse";
 
-const SUGGESTED = [
-  "Tell me about Ayush's background",
-  "What projects has he built?",
-  "What technologies does he work with?",
-  "How can I contact him?",
+const SUGGESTED_QUERIES = [
+  "What is AgniPress and how does the backend work?",
+  "Why did Ayush choose Java for his projects?",
+  "Tell me about the Explainable AI research project.",
+  "What did Ayush build during his AICTE internship?",
+  "What is his academic GPA and university?",
 ];
 
 export default function AssistantPanel() {
@@ -22,14 +20,31 @@ export default function AssistantPanel() {
   const [error, setError] = useState<string | null>(null);
   const [context] = useState<ConversationContext>({});
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
 
+  // Auto-scroll on new message
   useEffect(() => {
     if (isOpen) {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
-  }, [messages, isOpen]);
+  }, [messages, isLoading, isOpen]);
 
-  const send = async (text: string) => {
+  // ESC key to close panel
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isOpen) {
+        setIsOpen(false);
+      }
+    },
+    [isOpen]
+  );
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleKeyDown]);
+
+  const handleSend = async (text: string) => {
     if (!text.trim() || isLoading) return;
 
     const userMsg: Message = {
@@ -37,8 +52,9 @@ export default function AssistantPanel() {
       content: text.trim(),
       timestamp: Date.now(),
     };
-    const nextMessages = [...messages, userMsg];
-    setMessages(nextMessages);
+
+    const nextHistory = [...messages, userMsg];
+    setMessages(nextHistory);
     setIsLoading(true);
     setError(null);
 
@@ -48,133 +64,170 @@ export default function AssistantPanel() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           message: text.trim(),
-          history: nextMessages.slice(-10),
+          history: nextHistory.slice(-10),
           context,
         }),
       });
 
       if (res.status === 429) {
-        setError("Too many messages. Please wait a moment.");
+        setError("Too many requests. Please wait a moment before sending another message.");
         setIsLoading(false);
         return;
       }
+
       if (!res.ok) {
-        throw new Error("Assistant unavailable");
+        throw new Error("Assistant request failed");
       }
 
       const data = await res.json();
       const assistantMsg: Message = {
         role: "assistant",
-        content: data.response ?? data.error ?? "I couldn't generate a response.",
+        content: data.response || "I could not generate a response based on the available information.",
         timestamp: Date.now(),
       };
+
       setMessages((prev) => [...prev, assistantMsg]);
     } catch {
-      setError("Assistant temporarily unavailable. Please try again.");
+      setError("Assistant is temporarily unable to connect. Please try again.");
     } finally {
       setIsLoading(false);
     }
   };
 
+  const clearChat = () => {
+    setMessages([]);
+    setError(null);
+  };
+
   return (
     <>
-      {/* Trigger button */}
+      {/* Floating Trigger Button in Editorial Style */}
       <button
         onClick={() => setIsOpen(true)}
-        aria-label="Open portfolio assistant"
-        className={`fixed bottom-8 right-8 z-40 font-mono text-[var(--color-bg)] bg-[var(--color-accent)] text-[var(--text-mono-sm)] tracking-widest uppercase px-[var(--space-3)] py-[var(--space-2)] hover:bg-[var(--color-text-primary)] transition-colors duration-[var(--dur-normal)] ${
-          isOpen ? "opacity-0 pointer-events-none" : "opacity-100"
+        aria-label="Open portfolio assistant dialog"
+        aria-expanded={isOpen}
+        className={`fixed bottom-6 right-6 z-40 font-mono text-xs tracking-widest uppercase px-4 py-2.5 border transition-all duration-200 shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] ${
+          isOpen
+            ? "opacity-0 pointer-events-none"
+            : "opacity-100 bg-[#121212] border-[var(--color-accent)] text-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)]"
         }`}
       >
-        Ask →
+        Ask Assistant ↗
       </button>
 
-      {/* Panel overlay */}
+      {/* Slide-In Editorial Panel */}
       <div
+        ref={panelRef}
         role="dialog"
-        aria-label="Portfolio assistant"
+        aria-label="Portfolio AI Assistant"
         aria-modal="true"
-        className={`fixed inset-y-0 right-0 z-50 flex flex-col w-full tablet:w-[480px] bg-[var(--color-surface)] border-l border-[var(--color-border)] transition-transform duration-[var(--dur-medium)] ${
+        className={`fixed inset-y-0 right-0 z-50 flex flex-col w-full tablet:w-[480px] bg-[#0C0C0C] border-l border-[var(--color-border)] shadow-2xl transition-transform duration-300 ease-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* Panel header */}
-        <div className="flex items-center justify-between px-[var(--space-5)] py-[var(--space-4)] border-b border-[var(--color-border)] flex-shrink-0">
+        {/* Panel Header */}
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--color-border)] bg-[#101010]">
           <div>
-            <p className="font-mono text-[var(--color-text-tertiary)] text-[var(--text-mono-sm)] tracking-widest uppercase mb-0.5">
-              Assistant
-            </p>
-            <h2 className="font-display text-[var(--color-text-primary)]" style={{ fontSize: "var(--text-heading-md)" }}>
-              Ask about Ayush
-            </h2>
+            <div className="flex items-center gap-2 font-mono text-[10px] text-[var(--color-accent)] uppercase tracking-widest">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-success)]" />
+              <span>Grounded Portfolio Assistant</span>
+            </div>
+            <h3 className="font-display text-base text-[var(--color-text-primary)] font-normal">
+              Ayush Trivedi Knowledge System
+            </h3>
           </div>
-          <button
-            onClick={() => setIsOpen(false)}
-            aria-label="Close assistant"
-            className="font-mono text-[var(--color-text-tertiary)] text-lg hover:text-[var(--color-text-primary)] transition-colors duration-[var(--dur-fast)] p-2"
-          >
-            ✕
-          </button>
+
+          <div className="flex items-center gap-2">
+            {messages.length > 0 && (
+              <button
+                onClick={clearChat}
+                aria-label="Clear chat history"
+                className="font-mono text-[10px] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-primary)] uppercase px-2 py-1 transition-colors"
+              >
+                Clear
+              </button>
+            )}
+            <button
+              onClick={() => setIsOpen(false)}
+              aria-label="Close assistant"
+              className="font-mono text-xs text-[var(--color-text-tertiary)] hover:text-[var(--color-text-primary)] p-2 transition-colors"
+            >
+              ✕
+            </button>
+          </div>
         </div>
 
-        {/* Messages area */}
-        <div className="flex-1 overflow-y-auto px-[var(--space-5)] py-[var(--space-4)] space-y-[var(--space-4)]">
+        {/* Message Stream Area */}
+        <div
+          aria-live="polite"
+          className="flex-1 overflow-y-auto p-6 space-y-6 bg-[#0E0E0E]"
+        >
           {messages.length === 0 && (
-            <div className="space-y-[var(--space-4)]">
-              <p className="font-body text-[var(--color-text-secondary)] text-sm">
-                Ask me anything about Ayush&apos;s work, skills, or background.
-              </p>
+            <div className="space-y-6">
+              <div className="p-4 border border-[var(--color-border)] bg-[#141414]/50 space-y-2">
+                <span className="font-mono text-[11px] text-[var(--color-accent)] uppercase tracking-wider block">
+                  Natural Language Q&A
+                </span>
+                <p className="font-body text-xs text-[var(--color-text-secondary)] leading-relaxed">
+                  Ask natural questions regarding Ayush&apos;s engineering background, projects (AgniPress & Explainable AI), technical decisions, internship at AICTE, or skills.
+                </p>
+              </div>
+
               <div className="space-y-2">
-                {SUGGESTED.map((q) => (
-                  <button
-                    key={q}
-                    onClick={() => send(q)}
-                    className="block w-full text-left font-mono text-[var(--color-text-tertiary)] text-[var(--text-mono-sm)] border border-[var(--color-border)] px-3 py-2 hover:border-[var(--color-accent)] hover:text-[var(--color-text-primary)] transition-all duration-[var(--dur-fast)]"
-                  >
-                    {q}
-                  </button>
-                ))}
+                <span className="font-mono text-[10px] text-[var(--color-text-tertiary)] uppercase tracking-wider block">
+                  Sample Inquiries:
+                </span>
+                <div className="space-y-2">
+                  {SUGGESTED_QUERIES.map((query, qIdx) => (
+                    <button
+                      key={qIdx}
+                      onClick={() => handleSend(query)}
+                      className="w-full text-left font-mono text-xs text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] border border-[var(--color-border)] hover:border-[var(--color-accent)] p-3 bg-[#121212] transition-colors"
+                    >
+                      {query}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           )}
 
-          {messages.map((msg, i) => (
-            <AssistantResponse key={i} message={msg} />
+          {/* Render Messages */}
+          {messages.map((msg, idx) => (
+            <AssistantResponse key={idx} message={msg} />
           ))}
 
+          {/* Loading Indicator */}
           {isLoading && (
-            <div className="flex gap-1 py-2" aria-label="Generating response">
-              {[0, 1, 2].map((i) => (
-                <span
-                  key={i}
-                  className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] animate-bounce"
-                  style={{ animationDelay: `${i * 120}ms` }}
-                />
-              ))}
+            <div className="flex items-center gap-2 font-mono text-xs text-[var(--color-accent)] p-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] animate-ping" />
+              <span>Synthesizing verified response...</span>
             </div>
           )}
 
+          {/* Error Message */}
           {error && (
-            <p className="font-mono text-[var(--color-error)] text-[var(--text-mono-sm)]" role="alert">
+            <div
+              role="alert"
+              className="p-3 border border-[var(--color-error)] text-[var(--color-error)] font-mono text-xs bg-[#1C1212]"
+            >
               {error}
-            </p>
+            </div>
           )}
 
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input */}
-        <div className="flex-shrink-0 border-t border-[var(--color-border)]">
-          <AssistantInput onSend={send} disabled={isLoading} />
-        </div>
+        {/* Input Bar */}
+        <AssistantInput onSend={handleSend} disabled={isLoading} />
       </div>
 
-      {/* Backdrop (mobile) */}
+      {/* Backdrop for Mobile */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-[var(--color-bg)] opacity-60 tablet:hidden"
           onClick={() => setIsOpen(false)}
           aria-hidden="true"
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm tablet:hidden"
         />
       )}
     </>

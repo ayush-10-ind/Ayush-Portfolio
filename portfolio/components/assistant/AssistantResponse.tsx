@@ -1,23 +1,40 @@
-// components/assistant/AssistantResponse.tsx
+"use client";
 
+import React from "react";
 import type { Message } from "@/types/assistant";
 
-export default function AssistantResponse({ message }: { message: Message }) {
+interface AssistantResponseProps {
+  message: Message;
+}
+
+export default function AssistantResponse({ message }: AssistantResponseProps) {
   const isUser = message.role === "user";
 
   return (
-    <div className={`flex flex-col gap-1 ${isUser ? "items-end" : "items-start"}`}>
-      <span className="font-mono text-[var(--color-text-tertiary)] text-[10px] tracking-widest uppercase">
-        {isUser ? "You" : "Ayush's Portfolio"}
-      </span>
+    <div
+      className={`flex flex-col gap-1.5 ${
+        isUser ? "items-end ml-8" : "items-start mr-8"
+      }`}
+    >
+      <div className="flex items-center gap-2 font-mono text-[10px] text-[var(--color-text-tertiary)] uppercase tracking-wider">
+        <span>{isUser ? "You" : "Ayush's Assistant"}</span>
+        <span>·</span>
+        <span>
+          {new Date(message.timestamp).toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
+        </span>
+      </div>
+
       <div
-        className={`max-w-[85%] font-body text-[var(--text-body-sm)] leading-relaxed px-[var(--space-3)] py-[var(--space-2)] ${
+        className={`p-4 font-body text-xs tablet:text-sm leading-relaxed ${
           isUser
-            ? "text-[var(--color-text-primary)] bg-[var(--color-surface-elev)]"
-            : "text-[var(--color-text-secondary)]"
+            ? "bg-[var(--color-surface-elev)] text-[var(--color-text-primary)] border border-[var(--color-border)]"
+            : "bg-[#141414] text-[var(--color-text-primary)] border border-[var(--color-border)]"
         }`}
       >
-        {message.content}
+        <p className="whitespace-pre-wrap">{message.content}</p>
       </div>
     </div>
   );
