@@ -24,7 +24,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#0C0C0C",
+  themeColor: "#F4F0E6",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -33,7 +33,7 @@ export const viewport: Viewport = {
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ayush-portfolio.vercel.app";
 
 export const metadata: Metadata = {
-  title: "Ayush Trivedi — Software Engineer & CS Student",
+  title: "Ayush Trivedi â€” Software Engineer & CS Student",
   description:
     "Personal portfolio & 3D interactive spatial resume of Ayush Trivedi. Computer Science student at NIET Greater Noida (8.4 CGPA), Java & Spring Boot developer, and Explainable AI (XAI) researcher.",
   keywords: [
@@ -58,14 +58,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    title: "Ayush Trivedi — Software Engineer & CS Student",
+    title: "Ayush Trivedi â€” Software Engineer & CS Student",
     description:
       "Interactive 3D spatial developer portfolio showcasing AgniPress full-stack publishing platform, Explainable AI research, verified credentials, and grounded portfolio intelligence.",
     siteName: "Ayush Trivedi Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ayush Trivedi — Software Engineer & CS Student",
+    title: "Ayush Trivedi â€” Software Engineer & CS Student",
     description:
       "Interactive 3D developer portfolio and spatial resume of Ayush Trivedi. Java, Spring Boot, Python, and Explainable AI research.",
   },

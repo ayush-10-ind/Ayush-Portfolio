@@ -42,18 +42,18 @@ export default function CinematicStage() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full bg-[#0A0A0A] text-[var(--color-text-primary)]"
+      className="relative w-full bg-[#F4F0E6] text-[var(--color-text-primary)]"
       style={{
         height: shouldReduceMotion ? "auto" : "700vh",
       }}
     >
       {/* Sticky 100vh Viewport Stage */}
       <div className={`${shouldReduceMotion ? "relative min-h-screen" : "sticky top-0 h-screen w-full overflow-hidden"}`}>
-        {/* Persistent Spatial Football Kinematics */}
+        {/* Persistent Hand-Crafted Football & Tactical Path */}
         <FootballJourney />
 
         {/* Cinematic Scenes Layer */}
-        <div className="relative w-full h-full architectural-grid">
+        <div className="relative w-full h-full">
           <KickoffScene progress={scrollProgress} />
           <AboutSystemScene progress={scrollProgress} />
           <ResumeStudioScene progress={scrollProgress} />

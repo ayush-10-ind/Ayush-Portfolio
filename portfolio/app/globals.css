@@ -3,32 +3,31 @@
 @tailwind utilities;
 
 /* ==========================================================================
-   Design Token System & Tactical Architectural Tokens
+   Warm Ivory / Parchment Cinematic Palette — Ayush Trivedi Portfolio
    ========================================================================== */
 
 :root {
-  --color-bg:               #0A0A0A;
-  --color-bg-alt:           #0E0E0E;
-  --color-surface:          #141414;
-  --color-surface-elev:     #1C1C1C;
-  --color-border:           #242424;
-  --color-border-subtle:    #1A1A1A;
+  --color-bg:               #F4F0E6;
+  --color-bg-paper:         #E9E2D2;
+  --color-surface:          #FFFDF7;
+  --color-surface-elev:     #FFFFFF;
+  --color-border:           rgba(32, 37, 34, 0.12);
+  --color-border-strong:    rgba(32, 37, 34, 0.24);
 
-  --color-text-primary:     #F2EFEB;
-  --color-text-secondary:   #949088;
-  --color-text-tertiary:    #52504C;
+  --color-text-primary:     #202522;
+  --color-text-secondary:   #62645D;
+  --color-text-tertiary:    #8C8B82;
 
-  --color-accent:           #D4A853;
-  --color-accent-muted:     #8F7138;
-  --color-accent-subtle:    #241C14;
+  --color-pitch-green:      #29483A;
+  --color-pitch-deep:       #19352A;
+  --color-accent:           #C86B3C; /* Warm Terracotta */
+  --color-accent-muted:     #D48B64;
+  --color-accent-subtle:    #F7EBE3;
+  --color-gold:             #C59A4A;
 
-  --color-chalk:            #F4F1E8;
-  --color-turf-subtle:      #121F17;
-  --color-turf-mid:         #16281E;
-
-  --color-success:          #4A8C5C;
-  --color-warning:          #C4883A;
-  --color-error:            #8C4A4A;
+  --color-success:          #29483A;
+  --color-warning:          #C59A4A;
+  --color-error:            #A64238;
 
   --space-1:  8px;
   --space-2:  16px;
@@ -45,24 +44,22 @@
   --font-body:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono:     'JetBrains Mono', 'Fira Code', monospace;
 
-  --text-display-xl: clamp(64px, 10vw, 150px);
-  --text-display-lg: clamp(48px, 8vw, 110px);
-  --text-display-md: clamp(34px, 5vw, 68px);
-  --text-heading-lg: clamp(24px, 3vw, 40px);
-  --text-heading-md: clamp(18px, 2vw, 28px);
-  --text-body-lg:    clamp(17px, 1.4vw, 20px);
-  --text-body-md:    clamp(15px, 1.1vw, 17px);
+  --text-display-xl: clamp(56px, 9vw, 140px);
+  --text-display-lg: clamp(40px, 6.5vw, 96px);
+  --text-display-md: clamp(28px, 4.5vw, 60px);
+  --text-heading-lg: clamp(22px, 2.5vw, 36px);
+  --text-heading-md: clamp(17px, 1.8vw, 24px);
+  --text-body-lg:    clamp(16px, 1.3vw, 19px);
+  --text-body-md:    clamp(14px, 1.1vw, 16px);
   --text-body-sm:    13px;
-  --text-mono-md:    14px;
-  --text-mono-sm:    12px;
+  --text-mono-md:    13px;
+  --text-mono-sm:    11px;
 
   --ease-out:       cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in:        cubic-bezier(0.4, 0, 1, 1);
   --ease-in-out:    cubic-bezier(0.45, 0, 0.55, 1);
   --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-cinematic: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
-  --max-width:     1440px;
+  --max-width:     1400px;
   --gutter:        clamp(20px, 5vw, 96px);
   --gutter-mobile: 16px;
 }
@@ -74,27 +71,26 @@
     --dur-normal:    0ms;
     --dur-medium:    0ms;
     --dur-slow:      0ms;
-    --dur-cinematic: 0ms;
   }
 }
 
 /* ==========================================================================
-   Base Styles & Tactical Architectural Patterns
+   Base Styles & Parchment Texture
    ========================================================================== */
 
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-bg);
 }
 
 body {
   background-color: var(--color-bg);
   background-image: 
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(212, 168, 83, 0.04), transparent 70%),
-    radial-gradient(ellipse 60% 40% at 85% 45%, rgba(22, 40, 30, 0.25), transparent 60%),
-    radial-gradient(ellipse 70% 50% at 15% 75%, rgba(22, 40, 30, 0.2), transparent 70%);
-  background-attachment: fixed;
+    radial-gradient(circle at 15% 15%, rgba(200, 107, 60, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(41, 72, 58, 0.04) 0%, transparent 50%),
+    linear-gradient(to bottom, transparent, rgba(233, 226, 210, 0.3) 100%);
   color: var(--color-text-primary);
   font-family: var(--font-body);
   font-size: var(--text-body-md);
@@ -102,75 +98,29 @@ body {
   overflow-x: hidden;
 }
 
-/* Architectural Drafting & Tactical Grid Backdrop */
-.architectural-grid {
-  background-size: 80px 80px;
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+/* Subtle Hand-Drawn / Architectural Line Accents */
+.sketch-line {
+  border-color: var(--color-border);
 }
 
-/* Tactical Pitch Chalk Markings */
-.tactical-pitch-box {
-  position: relative;
+.sketch-border {
   border: 1px solid var(--color-border);
-}
-.tactical-pitch-box::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 12px;
-  height: 12px;
-  border-top: 2px solid var(--color-accent);
-  border-left: 2px solid var(--color-accent);
-  pointer-events: none;
-}
-.tactical-pitch-box::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 12px;
-  height: 12px;
-  border-bottom: 2px solid var(--color-accent);
-  border-right: 2px solid var(--color-accent);
-  pointer-events: none;
+  background-color: var(--color-surface);
+  box-shadow: 0 4px 20px -2px rgba(32, 37, 34, 0.04);
 }
 
-/* Architectural Corner Ticks */
-.drafting-corner {
-  position: relative;
-}
-.drafting-corner::before {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  width: 8px;
-  height: 8px;
-  border-top: 1.5px solid var(--color-accent);
-  border-left: 1.5px solid var(--color-accent);
-  pointer-events: none;
-}
-.drafting-corner::after {
-  content: "";
-  position: absolute;
-  bottom: -1px;
-  right: -1px;
-  width: 8px;
-  height: 8px;
-  border-bottom: 1.5px solid var(--color-accent);
-  border-right: 1.5px solid var(--color-accent);
-  pointer-events: none;
+.paper-sheet {
+  background-color: var(--color-surface);
+  border: 1px solid rgba(32, 37, 34, 0.08);
+  box-shadow: 0 10px 30px -5px rgba(32, 37, 34, 0.08), 0 2px 6px -1px rgba(32, 37, 34, 0.04);
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   font-weight: 400;
-  line-height: 1.08;
+  line-height: 1.1;
   color: var(--color-text-primary);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.015em;
 }
 
 p {
@@ -189,8 +139,8 @@ code, pre, kbd, samp {
 
 :focus-visible {
   outline: 2px solid var(--color-accent);
-  outline-offset: 4px;
-  border-radius: 1px;
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 ::selection {
@@ -199,17 +149,17 @@ code, pre, kbd, samp {
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 6px;
   background: var(--color-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-border);
-  border-radius: 2px;
+  background: rgba(32, 37, 34, 0.18);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent-muted);
+  background: var(--color-accent);
 }
 
 /* Skip to Content Accessibility Link */
@@ -217,8 +167,8 @@ code, pre, kbd, samp {
   position: absolute;
   top: -100%;
   left: 16px;
-  background: var(--color-accent);
-  color: #0A0A0A;
+  background: var(--color-pitch-green);
+  color: #FFFDF7;
   padding: 8px 16px;
   font-family: var(--font-mono);
   font-size: 12px;

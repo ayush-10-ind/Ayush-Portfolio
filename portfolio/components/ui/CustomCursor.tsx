@@ -1,73 +1,59 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useReducedMotion } from "framer-motion";
 
 export default function CustomCursor() {
-  const [position, setPosition] = useState({ x: -100, y: -100 });
-  const [isHovered, setIsHovered] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+  const [pos, setPos] = useState({ x: -100, y: -100 });
   const [isVisible, setIsVisible] = useState(false);
-  const [isTouch, setIsTouch] = useState(true);
+  const [isPointer, setIsPointer] = useState(false);
 
   useEffect(() => {
-    // Check if pointer is fine (desktop mouse)
-    const hasFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    if (!hasFinePointer) {
-      setIsTouch(true);
-      return;
-    }
-    setIsTouch(false);
+    if (shouldReduceMotion) return;
+    if (typeof window === "undefined" || window.innerWidth < 1024) return;
 
-    const onMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+    const handleMouseMove = (e: MouseEvent) => {
+      setPos({ x: e.clientX, y: e.clientY });
       if (!isVisible) setIsVisible(true);
-    };
 
-    const onMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
-      if (
-        target?.tagName === "BUTTON" ||
-        target?.tagName === "A" ||
-        target?.closest("button") ||
-        target?.closest("a") ||
-        target?.getAttribute("role") === "button"
-      ) {
-        setIsHovered(true);
-      } else {
-        setIsHovered(false);
+      if (target) {
+        const isClickable =
+          target.tagName === "BUTTON" ||
+          target.tagName === "A" ||
+          target.closest("button") !== null ||
+          target.closest("a") !== null;
+        setIsPointer(isClickable);
       }
     };
 
-    const onMouseLeave = () => {
-      setIsVisible(false);
-    };
+    const handleMouseLeave = () => setIsVisible(false);
 
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mouseover", onMouseOver);
-    document.addEventListener("mouseleave", onMouseLeave);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    document.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseover", onMouseOver);
-      document.removeEventListener("mouseleave", onMouseLeave);
+      window.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [isVisible]);
+  }, [isVisible, shouldReduceMotion]);
 
-  if (isTouch || !isVisible) return null;
+  if (shouldReduceMotion || !isVisible) return null;
 
   return (
     <div
       aria-hidden="true"
-      className="fixed pointer-events-none z-50 transition-transform duration-75 ease-out -translate-x-1/2 -translate-y-1/2"
+      className="fixed top-0 left-0 pointer-events-none z-50 transition-transform duration-75 ease-out"
       style={{
-        left: `${position.x}px`,
-        top: `${position.y}px`,
+        transform: `translate3d(${pos.x}px, ${pos.y}px, 0) translate(-50%, -50%)`,
       }}
     >
       <div
-        className={`rounded-full transition-all duration-200 ${
-          isHovered
-            ? "w-10 h-10 border border-[var(--color-accent)] bg-[var(--color-accent-subtle)] opacity-80"
-            : "w-3 h-3 bg-[var(--color-accent)] opacity-90"
+        className={`rounded-full transition-all duration-150 ${
+          isPointer
+            ? "w-7 h-7 bg-[rgba(200,107,60,0.2)] border border-[#C86B3C]"
+            : "w-3 h-3 bg-[#29483A]"
         }`}
       />
     </div>

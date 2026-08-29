@@ -28,19 +28,19 @@ export default function ExperienceTimelineScene({ progress }: SceneProps) {
       style={{ opacity }}
     >
       {/* Header */}
-      <div className="flex flex-col tablet:flex-row tablet:items-center justify-between gap-3 border-b border-[var(--color-border)]/60 pb-4 font-mono text-[11px] text-[var(--color-text-tertiary)] uppercase tracking-widest">
+      <div className="flex flex-col tablet:flex-row tablet:items-center justify-between gap-3 border-b border-[var(--color-border)] pb-4 font-mono text-[11px] text-[var(--color-text-secondary)] uppercase tracking-widest">
         <div className="flex items-center gap-3">
           <span className="text-[var(--color-accent)] font-medium">INDEX 05 / CHRONOLOGICAL PATH</span>
-          <span className="text-[var(--color-border)]">|</span>
+          <span className="text-[var(--color-border-strong)]">·</span>
           <span>INTERNSHIP · EDUCATION · CREDENTIALS</span>
         </div>
-        <span>AICTE &amp; NIET GREATER NOIDA</span>
+        <span className="text-[var(--color-pitch-green)] font-medium">AICTE &amp; NIET GREATER NOIDA</span>
       </div>
 
       {/* Main Content */}
       <div className="my-auto max-w-5xl mx-auto w-full space-y-6">
         <div className="space-y-1">
-          <span className="font-mono text-xs text-[var(--color-accent)] uppercase tracking-widest block">
+          <span className="font-mono text-xs text-[var(--color-accent)] uppercase tracking-widest block font-medium">
             CAREER FORMATION
           </span>
           <h2 className="font-display text-3xl tablet:text-4xl text-[var(--color-text-primary)] font-normal">
@@ -50,13 +50,13 @@ export default function ExperienceTimelineScene({ progress }: SceneProps) {
 
         <div className="grid grid-cols-1 laptop:grid-cols-12 gap-6 items-start">
           {/* Left Column: Industry Internship */}
-          <div className="laptop:col-span-7 border border-[var(--color-border)] p-6 bg-[#121212] drafting-corner space-y-4">
+          <div className="laptop:col-span-7 paper-sheet p-6 space-y-4">
             <div className="flex flex-col tablet:flex-row tablet:items-baseline justify-between gap-2 border-b border-[var(--color-border)] pb-3">
               <div>
                 <h3 className="font-display text-lg text-[var(--color-text-primary)] font-medium">
                   {exp.role}
                 </h3>
-                <span className="font-mono text-xs text-[var(--color-accent)]">
+                <span className="font-mono text-xs text-[var(--color-accent)] font-medium">
                   {exp.company}
                 </span>
               </div>
@@ -68,17 +68,17 @@ export default function ExperienceTimelineScene({ progress }: SceneProps) {
             <ul className="space-y-2 font-body text-xs text-[var(--color-text-secondary)]">
               {exp.responsibilities.map((resp, rIdx) => (
                 <li key={rIdx} className="flex items-start gap-2">
-                  <span className="text-[var(--color-accent)] font-mono shrink-0">—</span>
+                  <span className="text-[var(--color-accent)] font-mono shrink-0 font-medium">—</span>
                   <span>{resp}</span>
                 </li>
               ))}
             </ul>
 
-            <div className="flex flex-wrap gap-1.5 pt-2 border-t border-[var(--color-border)]/50">
+            <div className="flex flex-wrap gap-1.5 pt-2 border-t border-[var(--color-border)]">
               {exp.technologies.map((t) => (
                 <span
                   key={t}
-                  className="font-mono text-[10px] px-2 py-0.5 border border-[var(--color-border)] bg-[#161616] text-[var(--color-text-tertiary)]"
+                  className="font-mono text-[10px] px-2.5 py-0.5 bg-[var(--color-bg-paper)] text-[var(--color-text-primary)] font-medium"
                 >
                   {t}
                 </span>
@@ -91,13 +91,13 @@ export default function ExperienceTimelineScene({ progress }: SceneProps) {
             {educationList.map((edu) => (
               <div
                 key={edu.id}
-                className="border border-[var(--color-border)] p-4 bg-[#121212] drafting-corner space-y-1.5"
+                className="paper-sheet p-4 space-y-1.5"
               >
                 <div className="flex justify-between items-baseline">
                   <h4 className="font-display text-sm text-[var(--color-text-primary)] font-medium">
                     {edu.degree}
                   </h4>
-                  <span className="font-mono text-xs text-[var(--color-accent)]">
+                  <span className="font-mono text-xs text-[var(--color-pitch-green)] font-medium">
                     {edu.grade}
                   </span>
                 </div>
@@ -110,15 +110,15 @@ export default function ExperienceTimelineScene({ progress }: SceneProps) {
               </div>
             ))}
 
-            <div className="border border-[var(--color-border)] p-4 bg-[#121212] space-y-2">
-              <span className="font-mono text-[10px] text-[var(--color-accent)] uppercase tracking-wider block">
+            <div className="paper-sheet p-4 space-y-2">
+              <span className="font-mono text-[10px] text-[var(--color-accent)] uppercase tracking-wider block font-medium">
                 VERIFIED CREDENTIALS
               </span>
               <div className="space-y-1.5 font-mono text-[11px]">
                 {certifications.map((c, idx) => (
-                  <div key={idx} className="flex justify-between items-center text-[var(--color-text-secondary)]">
+                  <div key={idx} className="flex justify-between items-center text-[var(--color-text-secondary)] border-b border-[var(--color-border)] pb-1">
                     <span>{c.title}</span>
-                    <span className="text-[var(--color-accent)] text-[9px] uppercase border border-[var(--color-accent)]/30 px-1.5 py-0.5">
+                    <span className="text-[var(--color-pitch-green)] text-[9px] uppercase font-medium bg-[var(--color-accent-subtle)] px-2 py-0.5">
                       Verified
                     </span>
                   </div>
@@ -130,9 +130,9 @@ export default function ExperienceTimelineScene({ progress }: SceneProps) {
       </div>
 
       {/* Footer Navigation Cue */}
-      <div className="border-t border-[var(--color-border)]/60 pt-4 flex justify-between font-mono text-[10px] text-[var(--color-text-tertiary)] uppercase tracking-widest">
+      <div className="border-t border-[var(--color-border)] pt-4 flex justify-between font-mono text-[10px] text-[var(--color-text-secondary)] uppercase tracking-widest">
         <span>EXPERIENCE TIMELINE</span>
-        <span>SCROLL TO ADVANCE TO CRAFT WORKBENCH →</span>
+        <span className="text-[var(--color-accent)] font-medium">SCROLL TO ADVANCE TO CRAFT WORKBENCH →</span>
       </div>
     </div>
   );
