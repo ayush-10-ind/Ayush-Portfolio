@@ -1,34 +1,41 @@
-// lib/data/projects.ts — 100% verified factual projects for Ayush Trivedi
+// lib/data/projects.ts — Featured Case Studies for Ayush Trivedi
+// Showcases exclusively the two premier engineering projects: AgniPress & Explainable AI
 import type { Project } from "@/types/portfolio";
 
 export const projects: Project[] = [
   {
     id: "agnipress",
-    name: "AgniPress (News Portal)",
-    tagline: "Full-stack publishing engine & news platform with Spring Boot, JPA, and automated feed ingestion.",
-    type: "Full-Stack Web Systems / Java",
+    name: "AgniPress (News & Content Engine)",
+    tagline: "Full-stack publishing engine & news portal engineered with Java 21, Spring Boot 3, Spring Data JPA, and automated feed ingestion pipelines.",
+    type: "Full-Stack Web Systems / Java 21",
     status: "complete",
     period: "2025",
     problem:
-      "Modern news platforms require real-time aggregation from multi-source external APIs, scheduled background ingestion, user personalization (bookmarks, reading history), and secure role-based authentication without system degradation.",
+      "Modern editorial platforms require real-time aggregation from multi-source external news and weather APIs, scheduled background ingestion, user personalization (bookmarks, reading history, notifications), and secure role-based access control without compromising database transactional integrity or interface responsiveness.",
     solution:
-      "Engineered a full-stack publishing portal using Java 21, Spring Boot 3, and Spring Data JPA. Developed automated scheduling services for external news and weather APIs, role-based access control with OAuth2 login, dynamic bookmarking, live channel streaming, and reading history tracking.",
+      "Engineered a full-stack publishing portal using Java 21, Spring Boot 3, and Spring Data JPA. Designed automated scheduling services for external news and weather APIs, role-based access control with OAuth2 login, dynamic bookmarking, live channel streaming, and reading history tracking.",
     architecture:
       "Decoupled MVC & DTO architecture separating Controller endpoints, Service business logic, JPA Repository persistence, scheduled background jobs (NewsScheduler, NewsCleanupService), and custom Spring Security filter chains.",
     decisions: [
       {
-        question: "Why Spring Boot and Spring Data JPA for AgniPress?",
-        answer: "Spring Boot provides robust dependency injection, production-ready security integrations, and transaction management, while Spring Data JPA simplifies relational data modeling for users, bookmarks, categories, and articles.",
+        question: "Why Spring Boot 3 and Spring Data JPA for AgniPress?",
+        answer: "Spring Boot 3 provides robust dependency injection, production-ready security integrations, and transaction management, while Spring Data JPA simplifies relational data modeling for users, bookmarks, categories, and articles.",
         alternativesConsidered: "Considered lightweight microframeworks, but Spring Boot was chosen for comprehensive enterprise security, declarative transactions, and mature ORM tooling.",
       },
       {
-        question: "How is external news ingestion handled?",
-        answer: "Implemented scheduled background tasks (NewsScheduler) using Spring WebClient and custom DTO mappers to fetch, validate, and persist external article feeds while cleaning up stale records asynchronously.",
+        question: "How is automated news ingestion and lifecycle managed?",
+        answer: "Implemented scheduled background tasks (NewsScheduler) using Spring WebClient and custom DTO mappers to fetch, validate, and persist external article feeds while cleaning up stale records asynchronously via NewsCleanupService.",
+        alternativesConsidered: "Considered client-side fetching, but server-side background ingestion ensures consistent data normalization, centralized caching, and reduced client network overhead.",
+      },
+      {
+        question: "How is user authentication and session security structured?",
+        answer: "Implemented a custom Spring Security filter chain supporting standard username/password authentication alongside OAuth2 / OIDC social login, with role-based endpoint protection and custom access-denied handlers.",
       },
     ],
     challenges: [
-      "Managing relational data integrity across interconnected user interactions (bookmarks, notifications, reading history, OAuth accounts).",
+      "Managing relational data integrity across interconnected user entities (bookmarks, notifications, reading history, OAuth accounts).",
       "Handling external API schema variations and rate limits with robust exception handling and fallback mapping.",
+      "Optimizing scheduled database writes to prevent locking during peak ingestion cycles.",
     ],
     outcome:
       "Complete full-stack publishing platform with role-based security, OAuth2 integration, automated background news ingestion, and responsive editorial interfaces.",
@@ -36,10 +43,11 @@ export const projects: Project[] = [
       "Java 21",
       "Spring Boot 3",
       "Spring Data JPA",
-      "Spring Security (OAuth2)",
+      "Spring Security (OAuth2 / OIDC)",
       "Oracle / Relational DBMS",
       "Thymeleaf / HTML5 / CSS3",
       "REST APIs & WebClient",
+      "Scheduled Tasks (Cron)",
     ],
     links: {
       github: "https://github.com",
@@ -50,102 +58,48 @@ export const projects: Project[] = [
   {
     id: "explainable-ai-research",
     name: "Explainable AI Research Project",
-    tagline: "Researched Explainable AI (XAI) techniques to improve transparency and interpretability of machine learning models.",
-    type: "Machine Learning / Research",
+    tagline: "Researching model interpretability, feature attribution distributions, and decision transparency in machine learning pipelines.",
+    type: "Machine Learning / Research / Python",
     status: "complete",
     period: "2024 – 2025",
     problem:
-      "Machine learning models often operate as opaque black boxes, making it challenging to understand decision boundaries, interpret predictions, and audit algorithmic outcomes.",
+      "Complex machine learning models frequently operate as opaque black boxes. In high-stakes applications, the inability to understand internal decision boundaries, verify feature importance distributions, and audit model predictions introduces severe transparency and trust deficits.",
     solution:
-      "Researched and evaluated Explainable AI (XAI) methods to inspect model inference mechanisms, analyze feature importance distributions, and enhance model interpretability.",
+      "Researched and evaluated Explainable AI (XAI) attribution methods to inspect model inference mechanisms, analyze feature importance distributions, and provide human-interpretable explanations of algorithmic decision pathways.",
     architecture:
-      "Python-based machine learning analytics pipeline analyzing model inference activations, prediction interpretability, and feature attribution.",
+      "Python-based machine learning analytics pipeline evaluating model prediction weights, feature attribution scoring, and prediction interpretability visualizations.",
     decisions: [
       {
         question: "Why Python for Explainable AI research?",
         answer: "Python provides the standard scientific and machine learning ecosystem necessary for matrix computations, model inspection, and rapid algorithmic validation.",
-        alternativesConsidered: "Considered R, but Python was chosen for broader framework interoperability and standard ML library tooling.",
+        alternativesConsidered: "Considered R for statistical depth, but Python was chosen for broader framework interoperability and standard ML library tooling.",
+      },
+      {
+        question: "How is model interpretability evaluated?",
+        answer: "Analyzed post-hoc feature attribution techniques to quantify individual input feature contributions toward final model predictions, comparing local and global explanation fidelity.",
       },
     ],
     challenges: [
       "Analyzing decision boundaries across complex machine learning model predictions.",
       "Providing clear, interpretable representations of model decision mechanics without mathematical distortion.",
+      "Balancing computational overhead during real-time feature attribution calculation.",
     ],
     outcome:
       "Completed comprehensive research analysis on XAI methods with public GitHub repository and YouTube technical demonstration.",
-    technologies: ["Python", "Machine Learning", "Explainable AI (XAI)", "Data Analysis"],
+    technologies: [
+      "Python",
+      "Machine Learning",
+      "Explainable AI (XAI)",
+      "Feature Attribution",
+      "Model Interpretability",
+      "Data Analysis & Visualization",
+    ],
     links: {
       github: "https://github.com",
       live: "https://youtube.com",
     },
     featured: true,
     order: 2,
-  },
-  {
-    id: "flappy-bird-java",
-    name: "Flappy Bird Game",
-    tagline: "Java desktop game engine implementing collision physics, obstacle generation, score tracking, and OOP principles.",
-    type: "Desktop Application / Systems",
-    status: "complete",
-    period: "2024",
-    problem:
-      "Designing a deterministic 2D game loop with real-time coordinate bounding-box collision detection, obstacle generation, and score tracking without frame stutter.",
-    solution:
-      "Developed a pure Java game applying object-oriented programming principles to manage game logic, collision detection algorithms, obstacle spawning, and game state transitions.",
-    architecture:
-      "Object-oriented architecture cleanly separating game entities, coordinate collision detection algorithms, obstacle generator routines, and score state management.",
-    decisions: [
-      {
-        question: "Why Java for desktop game development?",
-        answer: "Java enforces strong static typing, explicit memory modeling, and OOP encapsulation, making it ideal for mastering deterministic state machines and entity management.",
-        alternativesConsidered: "Considered script-based canvas frameworks, but Java was chosen to solidify core OOP and computational foundations.",
-      },
-    ],
-    challenges: [
-      "Precision collision detection between dynamic bird coordinates and moving obstacle pipes.",
-      "Managing game state transitions (start, active gameplay, game over, score reset).",
-    ],
-    outcome:
-      "Functional desktop game demonstrating OOP principles and collision physics, published on GitHub.",
-    technologies: ["Java", "Object-Oriented Programming (OOP)", "Collision Detection", "Data Structures"],
-    links: {
-      github: "https://github.com",
-    },
-    featured: true,
-    order: 3,
-  },
-  {
-    id: "personal-portfolio-website",
-    name: "Personal Portfolio Website",
-    tagline: "Responsive portfolio website featuring dark mode, mobile-first design, and smooth UI animations.",
-    type: "Web Development",
-    status: "complete",
-    period: "2024 – 2025",
-    problem:
-      "Creating an accessible, user-friendly personal website to showcase projects, technical skills, and professional profile across devices.",
-    solution:
-      "Designed and deployed a responsive portfolio website featuring dark mode, mobile-first design, and smooth UI animations.",
-    architecture:
-      "Clean modular frontend structure showcasing projects, skills, education, and contact in a user-friendly interface.",
-    decisions: [
-      {
-        question: "Why HTML5, CSS3, and JavaScript?",
-        answer: "Mastering foundational web standards ensures responsive performance, semantic structure, and smooth animations without heavy dependencies.",
-        alternativesConsidered: "Static site generators were considered, but building from fundamentals ensured direct control over UI responsiveness and dark mode design.",
-      },
-    ],
-    challenges: [
-      "Ensuring clean mobile-first layout fluidity across diverse viewport resolutions.",
-      "Implementing smooth UI animations and dark mode theme transitions.",
-    ],
-    outcome:
-      "Deployed responsive portfolio showcasing projects, skills, and professional profile.",
-    technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "UI Animations"],
-    links: {
-      github: "https://github.com",
-    },
-    featured: true,
-    order: 4,
   },
 ];
 

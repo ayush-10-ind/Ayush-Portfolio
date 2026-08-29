@@ -1,5 +1,5 @@
 # knowledge.md — AI Knowledge Base (Verified Source of Truth)
-> Version: 2.2.0 | Last updated: 2026-08-29
+> Version: 2.3.0 | Last updated: 2026-08-29
 > Status: VERIFIED source of truth for Ayush Trivedi's portfolio
 
 ---
@@ -18,120 +18,76 @@
 | LinkedIn | linkedin.com |
 | Availability / Objective | Seeking internship and software development opportunities to apply technical skills, build impactful solutions, and grow as a software engineer. |
 
-### Objective & Profile Summary
-Computer Science and Engineering student at NIET Gr. Noida (8.4 CGPA) with experience in Java, Python, web development, and data structures algorithms. Seeking internship and software development opportunities to apply technical skills, build impactful solutions, and grow as a software engineer.
-
 ---
 
 ## 2. EDUCATION
 
 ### Undergraduate Degree
-| Field | Value |
-|---|---|
-| Institution | Noida Institute of Engineering and Technology (NIET), Gr. Noida |
-| Degree | B.Tech in Computer Science and Engineering |
-| Period | Expected 2028 |
-| Academic Standing | 8.4 CGPA |
-| Location | Greater Noida, Uttar Pradesh, India |
+- **Institution**: Noida Institute of Engineering and Technology (NIET), Gr. Noida
+- **Degree**: B.Tech in Computer Science and Engineering (Expected 2028)
+- **Academic Standing**: 8.4 CGPA
+- **Location**: Greater Noida, Uttar Pradesh, India
 
-### Secondary / High School Education
-| Field | Value |
-|---|---|
-| Institution | Kendriya Vidyalaya Raebareli |
-| Degree | 12th Grade (Intermediate) |
-| Period | 2021 – 2022 |
-| Location | Raebareli, Uttar Pradesh, India |
+### Secondary Education
+- **Institution**: Kendriya Vidyalaya Raebareli
+- **Degree**: 12th Grade (Intermediate, 2021 – 2022)
+- **Location**: Raebareli, Uttar Pradesh, India
 
 ---
 
 ## 3. SKILLS & COMPETENCIES
 
-### Languages
-- Java
-- Python
-- Javascript
-
-### Database
-- Oracle Database
-- Relational Schema Design & SQL
-
-### Frontend Technologies
-- React.js
-- HTML5
-- CSS3 & Modern Responsive Design
-
-### Tools & Platforms
-- VS Code
-- Git & GitHub
-- Problem Solving / DSA Platforms (LeetCode)
+- **Languages**: Java (Core & OOP), Python, JavaScript (ES6+)
+- **Databases**: Oracle Database, Relational Schema Design & SQL
+- **Frontend**: React.js, HTML5, CSS3, Tailwind CSS
+- **Tools**: VS Code, Git, GitHub, LeetCode / DSA
 
 ---
 
 ## 4. FEATURED ENGINEERING PROJECTS
 
-### Project 1: AgniPress
-- **Category**: Full-Stack Publishing Engine / Web Application
-- **Core Focus**: High-performance content publishing, structured editorial management, and modular backend architecture.
-- **Problem**: Modern content platforms often suffer from monolithic bloat, slow editorial workflows, and complex database querying layers.
-- **Solution**: Developed AgniPress as an efficient, modern publishing engine designed with clean architectural separation between content persistence, API delivery, and reading interfaces.
-- **Technical Decisions**: Engineered decoupled services for content handling, structured database querying, and responsive UI delivery.
-- **Technologies**: JavaScript / TypeScript, Node.js / Web backend, Database storage, Responsive Frontend.
-- **Links**: GitHub repository (when verified / configured)
+### Featured Project 1: AgniPress
+- **Category**: Full-Stack Web Systems / Java 21 & Spring Boot 3
+- **Focus**: High-performance publishing engine, automated feed ingestion, and role-based security.
+- **Problem**: Multi-source news feed aggregation, background ingestion, user personalization (bookmarks, reading history, notifications), and secure authentication.
+- **Solution**: Engineered a full-stack publishing portal using Java 21, Spring Boot 3, and Spring Data JPA. Built automated scheduling services (NewsScheduler) for external news and weather APIs, role-based access control with OAuth2 login, dynamic bookmarking, live channel streaming, and reading history tracking.
+- **Architecture**: Decoupled MVC & DTO architecture separating Controller endpoints, Service business logic, JPA Repository persistence, scheduled background jobs, and custom Spring Security filter chains.
+- **Technologies**: Java 21, Spring Boot 3, Spring Data JPA, Spring Security (OAuth2), Oracle / Relational DBMS, Thymeleaf / HTML5 / CSS3, REST APIs & WebClient.
 
-### Project 2: Explainable AI Research Project
+### Featured Project 2: Explainable AI Research Project
 - **Category**: Machine Learning / Artificial Intelligence (XAI)
-- **Core Focus**: Model transparency and prediction interpretability.
-- **Problem**: Machine learning models often operate as opaque black boxes, obscuring decision logic.
-- **Solution**: Researched Explainable AI (XAI) techniques to inspect model decision boundaries, evaluate feature attribution, and enhance model interpretability.
-- **Technologies**: Python, Machine Learning
-- **Links**: GitHub repository, YouTube Technical Demo
-
-### Project 3: Flappy Bird Game
-- **Category**: Desktop Systems / Game Engine Architecture
-- **Core Focus**: Deterministic game physics, collision detection, and OOP state design.
-- **Problem**: Real-time 2D game loop synchronization, coordinate bounding-box collision detection, and dynamic obstacle spawning without frame drops.
-- **Solution**: Built a pure Java game engine applying strict Object-Oriented Programming (OOP) patterns, encapsulation, and responsive entity handling.
-- **Technologies**: Java, OOP, Collision Detection
-- **Links**: GitHub repository
-
-### Project 4: Personal Portfolio Website
-- **Category**: Responsive Web Development
-- **Core Focus**: Accessible, responsive frontend design with dark mode and smooth transitions.
-- **Solution**: Built and deployed a mobile-first responsive portfolio showcasing technical skills and projects.
-- **Technologies**: HTML5, CSS3, JavaScript
+- **Focus**: Model transparency and prediction interpretability.
+- **Problem**: Complex machine learning models operating as opaque black boxes.
+- **Solution**: Researched Explainable AI (XAI) techniques to inspect model inference mechanisms, analyze feature importance distributions, and enhance model interpretability.
+- **Technologies**: Python, Machine Learning, Explainable AI (XAI), Data Analysis.
+- **Links**: GitHub repository, YouTube Technical Demo.
 
 ---
 
-## 5. EXPERIENCE
+## 5. OTHER VERIFIED HISTORICAL PROJECTS & BACKGROUND
+
+- **Flappy Bird Game**: Developed a Java-based Flappy Bird game implementing collision detection, obstacle generation, score tracking, and object-oriented programming principles. (GitHub)
+- **Personal Portfolio Website**: Designed and deployed a responsive portfolio website featuring dark mode, mobile-first design, and smooth UI animations. (HTML/CSS/JS)
+
+---
+
+## 6. EXPERIENCE
 
 ### Python Developer Intern — AICTE Code Technologies
 - **Duration**: June 2025 – July 2025
-- **Organization**: AICTE Code Technologies
-- **Key Responsibilities & Contributions**:
-  - Developed Python programs utilizing file handling, functions, loops, and OOP concepts.
-  - Solved programming challenges and improved debugging velocity.
-  - Built applications following software engineering best practices and clean code structure.
-  - Strengthened algorithmic problem-solving and runtime optimization techniques.
+- **Key Work**: Developed modular Python programs using file handling, functions, loops, and OOP concepts. Solved programming challenges, applied debugging methodologies, and optimized code execution.
 
 ---
 
-## 6. CERTIFICATIONS
+## 7. CERTIFICATIONS
 
-1. **Python Developer Internship** — AICTE Code Technologies (Credentials)
-2. **Infosys Twitter Bootstrap** — Infosys Springboard (Credentials)
-3. **Infosys Database Management System** — Infosys Springboard (Credentials)
-
----
-
-## 7. EXTRACURRICULAR ACTIVITIES
-
-- Actively participate in football, fostering teamwork, discipline, and leadership skills.
-- Regularly solve Data Structures & Algorithms (DSA) problems and participate in coding challenges.
-- Engage in technical workshops and self-learning initiatives in software engineering.
+1. **Python Developer Internship** — AICTE Code Technologies
+2. **Infosys Twitter Bootstrap** — Infosys Springboard
+3. **Infosys Database Management System** — Infosys Springboard
 
 ---
 
-## 8. STRICT ANTI-HALLUCINATION BOUNDARIES
+## 8. EXTRACURRICULAR
 
-- The AI assistant is strictly bound to the factual information documented above.
-- Never invent metrics, employers, unverified technologies, or fictitious claims.
+- Active football player (teamwork, leadership, tactical discipline).
+- Daily competitive programming and Data Structures & Algorithms on LeetCode.
