@@ -1,15 +1,8 @@
-// app/page.tsx — Spatial Football Experience Root Composition
+// app/page.tsx — Interactive Animated Film & Spatial Portfolio Composition
 import Navigation from "@/components/sections/Navigation";
-import Hero from "@/components/sections/Hero";
-import About from "@/components/sections/About";
-import SpatialResumeStudio from "@/components/resume/SpatialResumeStudio";
-import Projects from "@/components/sections/Projects";
-import Experience from "@/components/sections/Experience";
-import Skills from "@/components/sections/Skills";
-import Contact from "@/components/sections/Contact";
+import CinematicStage from "@/components/cinematic/CinematicStage";
 import AssistantPanel from "@/components/assistant/AssistantPanel";
 import CustomCursor from "@/components/ui/CustomCursor";
-import FootballJourney from "@/components/spatial/FootballJourney";
 import SmoothScrollProvider from "@/components/spatial/SmoothScrollProvider";
 
 export default function Home() {
@@ -18,24 +11,15 @@ export default function Home() {
       {/* Desktop Custom Cursor */}
       <CustomCursor />
 
-      {/* Persistent Spatial Football & Tactical Chalk Path */}
-      <FootballJourney />
-
-      {/* Fixed Navigation & Match Progress Line */}
+      {/* Fixed Navigation & Coordinate Index */}
       <Navigation />
 
-      {/* Main Spatial Journey Scenes */}
+      {/* Main Continuous Cinematic Stage */}
       <main id="main-content" className="relative">
-        <Hero />
-        <About />
-        <SpatialResumeStudio />
-        <Projects />
-        <Experience />
-        <Skills />
-        <Contact />
+        <CinematicStage />
       </main>
 
-      {/* Intelligent Research Assistant Panel */}
+      {/* Grounded Research Archive Assistant */}
       <AssistantPanel />
     </SmoothScrollProvider>
   );
