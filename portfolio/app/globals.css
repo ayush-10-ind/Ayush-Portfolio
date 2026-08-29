@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* ==========================================================================
-   Design Token System & Architectural Space Tokens
+   Design Token System & Tactical Architectural Tokens
    ========================================================================== */
 
 :root {
@@ -21,6 +21,10 @@
   --color-accent:           #D4A853;
   --color-accent-muted:     #8F7138;
   --color-accent-subtle:    #241C14;
+
+  --color-chalk:            #F4F1E8;
+  --color-turf-subtle:      #121F17;
+  --color-turf-mid:         #16281E;
 
   --color-success:          #4A8C5C;
   --color-warning:          #C4883A;
@@ -41,7 +45,7 @@
   --font-body:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono:     'JetBrains Mono', 'Fira Code', monospace;
 
-  --text-display-xl: clamp(68px, 11vw, 160px);
+  --text-display-xl: clamp(64px, 10vw, 150px);
   --text-display-lg: clamp(48px, 8vw, 110px);
   --text-display-md: clamp(34px, 5vw, 68px);
   --text-heading-lg: clamp(24px, 3vw, 40px);
@@ -57,13 +61,6 @@
   --ease-in-out:    cubic-bezier(0.45, 0, 0.55, 1);
   --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-cinematic: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-
-  --dur-instant:   80ms;
-  --dur-fast:      150ms;
-  --dur-normal:    300ms;
-  --dur-medium:    500ms;
-  --dur-slow:      800ms;
-  --dur-cinematic: 1200ms;
 
   --max-width:     1440px;
   --gutter:        clamp(20px, 5vw, 96px);
@@ -82,7 +79,7 @@
 }
 
 /* ==========================================================================
-   Atmospheric Ink Background & Architectural Grid
+   Base Styles & Tactical Architectural Patterns
    ========================================================================== */
 
 html {
@@ -95,8 +92,8 @@ body {
   background-color: var(--color-bg);
   background-image: 
     radial-gradient(ellipse 80% 50% at 50% -20%, rgba(212, 168, 83, 0.04), transparent 70%),
-    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(212, 168, 83, 0.02), transparent 60%),
-    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(255, 255, 255, 0.015), transparent 60%);
+    radial-gradient(ellipse 60% 40% at 85% 45%, rgba(22, 40, 30, 0.25), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 15% 75%, rgba(22, 40, 30, 0.2), transparent 70%);
   background-attachment: fixed;
   color: var(--color-text-primary);
   font-family: var(--font-body);
@@ -105,12 +102,40 @@ body {
   overflow-x: hidden;
 }
 
-/* Architectural Grid Backdrop (Subtle) */
+/* Architectural Drafting & Tactical Grid Backdrop */
 .architectural-grid {
   background-size: 80px 80px;
   background-image:
     linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+}
+
+/* Tactical Pitch Chalk Markings */
+.tactical-pitch-box {
+  position: relative;
+  border: 1px solid var(--color-border);
+}
+.tactical-pitch-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid var(--color-accent);
+  border-left: 2px solid var(--color-accent);
+  pointer-events: none;
+}
+.tactical-pitch-box::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  border-bottom: 2px solid var(--color-accent);
+  border-right: 2px solid var(--color-accent);
+  pointer-events: none;
 }
 
 /* Architectural Corner Ticks */

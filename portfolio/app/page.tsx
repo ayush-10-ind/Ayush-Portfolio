@@ -1,4 +1,4 @@
-// app/page.tsx — SPA Root Composition
+// app/page.tsx — Spatial Football Experience Root Composition
 import Navigation from "@/components/sections/Navigation";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
@@ -9,17 +9,22 @@ import Skills from "@/components/sections/Skills";
 import Contact from "@/components/sections/Contact";
 import AssistantPanel from "@/components/assistant/AssistantPanel";
 import CustomCursor from "@/components/ui/CustomCursor";
+import FootballJourney from "@/components/spatial/FootballJourney";
+import SmoothScrollProvider from "@/components/spatial/SmoothScrollProvider";
 
 export default function Home() {
   return (
-    <>
+    <SmoothScrollProvider>
       {/* Desktop Custom Cursor */}
       <CustomCursor />
 
-      {/* Fixed Navigation & Header */}
+      {/* Persistent Spatial Football & Tactical Chalk Path */}
+      <FootballJourney />
+
+      {/* Fixed Navigation & Match Progress Line */}
       <Navigation />
 
-      {/* Main Content Sections */}
+      {/* Main Spatial Journey Scenes */}
       <main id="main-content" className="relative">
         <Hero />
         <About />
@@ -30,8 +35,8 @@ export default function Home() {
         <Contact />
       </main>
 
-      {/* Intelligent Assistant Panel */}
+      {/* Intelligent Research Assistant Panel */}
       <AssistantPanel />
-    </>
+    </SmoothScrollProvider>
   );
 }

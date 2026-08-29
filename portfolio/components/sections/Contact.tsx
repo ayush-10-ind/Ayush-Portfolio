@@ -8,10 +8,18 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      aria-label="Direct Communication & Inquiries"
-      className="py-32 px-[var(--gutter)] bg-[#0C0C0C] relative"
+      aria-label="Full Time & Direct Inquiries"
+      className="py-32 px-[var(--gutter)] bg-[#0A0A0A] relative overflow-hidden"
     >
-      <div className="max-w-[var(--max-width)] mx-auto space-y-16">
+      {/* Final Tactical Center Circle Graphic */}
+      <div
+        aria-hidden="true"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] tablet:w-[600px] h-[380px] tablet:h-[600px] rounded-full border border-[var(--color-border)]/40 pointer-events-none flex items-center justify-center"
+      >
+        <div className="w-4 h-4 rounded-full border border-[var(--color-accent)]/80 bg-[var(--color-accent)]/20" />
+      </div>
+
+      <div className="max-w-[var(--max-width)] mx-auto space-y-16 relative z-10">
         {/* Section Header */}
         <ScrollReveal direction="up" distance={20}>
           <div className="flex flex-col tablet:flex-row tablet:items-baseline justify-between gap-4 border-b border-[var(--color-border)] pb-6">
@@ -24,13 +32,13 @@ export default function Contact() {
               </span>
               <div>
                 <span className="font-mono text-xs text-[var(--color-text-tertiary)] uppercase tracking-[0.2em] block mb-1">
-                  Communication Channels
+                  Final Whistle · Full Time
                 </span>
                 <h2
                   className="font-display text-[var(--color-text-primary)] font-normal tracking-tight"
                   style={{ fontSize: "var(--text-heading-lg)" }}
                 >
-                  Direct Inquiry.
+                  Full Time. Let&apos;s Build.
                 </h2>
               </div>
             </div>
@@ -51,7 +59,7 @@ export default function Contact() {
 
             <div className="pt-4">
               <span className="font-mono text-xs text-[var(--color-text-tertiary)] uppercase tracking-wider block mb-2">
-                Primary Direct Channel:
+                Direct Communication Channel:
               </span>
               <a
                 href={`mailto:${profile.email}`}
@@ -106,7 +114,7 @@ export default function Contact() {
         {/* Architectural Footer */}
         <div className="border-t border-[var(--color-border)] pt-8 flex flex-col tablet:flex-row justify-between items-center gap-4 font-mono text-xs text-[var(--color-text-tertiary)]">
           <div>
-            © {new Date().getFullYear()} AYUSH TRIVEDI · ARCHITECTURAL STUDIO
+            © {new Date().getFullYear()} AYUSH TRIVEDI · SPATIAL FOOTBALL STUDIO
           </div>
           <div>
             NIET GREATER NOIDA · CSE &apos;28

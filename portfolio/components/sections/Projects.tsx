@@ -15,7 +15,7 @@ export default function Projects() {
     <section
       id="case-studies"
       aria-label="Engineering Case Studies"
-      className="py-28 px-[var(--gutter)] border-b border-[var(--color-border)] bg-[#0C0C0C]"
+      className="py-28 px-[var(--gutter)] border-b border-[var(--color-border)] bg-[#0C0C0C] relative"
     >
       <div className="max-w-[var(--max-width)] mx-auto space-y-12">
         {/* Section Header */}
@@ -30,7 +30,7 @@ export default function Projects() {
               </span>
               <div>
                 <span className="font-mono text-xs text-[var(--color-text-tertiary)] uppercase tracking-[0.2em] block mb-1">
-                  Verified Engineering Dossiers
+                  Tactical Engineering Playbook
                 </span>
                 <h2
                   className="font-display text-[var(--color-text-primary)] font-normal tracking-tight"
@@ -119,6 +119,54 @@ export default function Projects() {
               <p className="font-body text-sm tablet:text-base text-[var(--color-text-secondary)] leading-relaxed max-w-4xl">
                 {currentProject.tagline}
               </p>
+
+              {/* Verified Tactical Architecture Flowchart */}
+              <div className="border border-[var(--color-border)]/80 p-5 bg-[#0E0E0E] space-y-3">
+                <span className="font-mono text-[10px] text-[var(--color-accent)] uppercase tracking-widest block">
+                  TACTICAL SYSTEM FLOW DIAGRAM
+                </span>
+                
+                {currentProject.id === "agnipress" ? (
+                  <div className="grid grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-6 gap-2 font-mono text-[11px] text-center">
+                    <div className="p-2 border border-[var(--color-border)] bg-[#141414] text-[var(--color-text-primary)]">
+                      1. News APIs
+                    </div>
+                    <div className="p-2 border border-[var(--color-border)] bg-[#141414] text-[var(--color-text-primary)]">
+                      2. WebClient
+                    </div>
+                    <div className="p-2 border border-[var(--color-border)] bg-[#141414] text-[var(--color-text-primary)]">
+                      3. Schedulers
+                    </div>
+                    <div className="p-2 border border-[var(--color-border)] bg-[#141414] text-[var(--color-text-primary)]">
+                      4. Service DTO
+                    </div>
+                    <div className="p-2 border border-[var(--color-border)] bg-[#141414] text-[var(--color-text-primary)]">
+                      5. Spring JPA
+                    </div>
+                    <div className="p-2 border border-[var(--color-accent)]/60 bg-[#161616] text-[var(--color-accent)] font-medium">
+                      6. Relational DB
+                    </div>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-2 tablet:grid-cols-5 gap-2 font-mono text-[11px] text-center">
+                    <div className="p-2 border border-[var(--color-border)] bg-[#141414] text-[var(--color-text-primary)]">
+                      1. Input Features
+                    </div>
+                    <div className="p-2 border border-[var(--color-border)] bg-[#141414] text-[var(--color-text-primary)]">
+                      2. Black-Box ML
+                    </div>
+                    <div className="p-2 border border-[var(--color-border)] bg-[#141414] text-[var(--color-text-primary)]">
+                      3. Prediction
+                    </div>
+                    <div className="p-2 border border-[var(--color-border)] bg-[#141414] text-[var(--color-text-primary)]">
+                      4. Attribution
+                    </div>
+                    <div className="p-2 border border-[var(--color-accent)]/60 bg-[#161616] text-[var(--color-accent)] font-medium">
+                      5. Explanation
+                    </div>
+                  </div>
+                )}
+              </div>
 
               {/* Technologies Tag Array */}
               <div className="flex flex-wrap gap-2 pt-2">

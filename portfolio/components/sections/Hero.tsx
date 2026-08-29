@@ -37,20 +37,25 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      aria-label="Introduction & Studio Overview"
-      className="relative min-h-[92vh] flex flex-col justify-between pt-32 pb-16 px-[var(--gutter)] border-b border-[var(--color-border)] architectural-grid overflow-hidden"
+      aria-label="Kickoff & Introduction"
+      className="relative min-h-[95vh] flex flex-col justify-between pt-32 pb-16 px-[var(--gutter)] border-b border-[var(--color-border)] architectural-grid overflow-hidden"
     >
-      {/* Ambient Radial Studio Glow */}
+      {/* Tactical Center Circle Graphic Backdrop */}
       <div
         aria-hidden="true"
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] tablet:w-[900px] h-[400px] bg-[radial-gradient(circle_at_center,rgba(212,168,83,0.05)_0%,transparent_70%)] pointer-events-none"
-      />
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] tablet:w-[540px] laptop:w-[680px] h-[340px] tablet:h-[540px] laptop:h-[680px] rounded-full border border-[var(--color-border)]/60 pointer-events-none flex items-center justify-center"
+      >
+        {/* Center Spot */}
+        <div className="w-3 h-3 rounded-full bg-[var(--color-accent)] shadow-[0_0_12px_rgba(212,168,83,0.6)] animate-pulse" />
+        {/* Inner Tactical Radii */}
+        <div className="absolute inset-8 rounded-full border border-dashed border-[var(--color-border)]/40" />
+      </div>
 
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="max-w-[var(--max-width)] mx-auto w-full flex-1 flex flex-col justify-between space-y-16"
+        className="max-w-[var(--max-width)] mx-auto w-full flex-1 flex flex-col justify-between space-y-16 relative z-10"
       >
         {/* Top Exhibition Metadata Strip */}
         <motion.div
@@ -58,9 +63,9 @@ export default function Hero() {
           className="flex flex-col tablet:flex-row tablet:items-center justify-between gap-4 font-mono text-[11px] text-[var(--color-text-tertiary)] border-b border-[var(--color-border)] pb-4 tracking-widest uppercase"
         >
           <div className="flex items-center gap-3">
-            <span className="text-[var(--color-accent)] font-medium">INDEX 00 / OPENING</span>
+            <span className="text-[var(--color-accent)] font-medium">INDEX 00 / KICKOFF</span>
             <span className="text-[var(--color-border)]">|</span>
-            <span>DIGITAL ARCHITECTURAL STUDIO</span>
+            <span>FORMATION: 4-3-3 SYSTEMS &amp; ML</span>
           </div>
 
           <div className="flex items-center gap-4">
@@ -88,8 +93,9 @@ export default function Hero() {
               </motion.h1>
             </div>
 
-            <motion.div variants={itemVariants} className="pt-2">
-              <span className="font-mono text-xs tablet:text-sm text-[var(--color-accent)] uppercase tracking-[0.25em] block">
+            <motion.div variants={itemVariants} className="pt-2 flex items-center gap-3">
+              <span className="w-2 h-2 rounded-full bg-[var(--color-accent)]" />
+              <span className="font-mono text-xs tablet:text-sm text-[var(--color-accent)] uppercase tracking-[0.25em]">
                 Software Engineer · CS Undergraduate (NIET &apos;28)
               </span>
             </motion.div>
@@ -101,7 +107,7 @@ export default function Hero() {
             className="laptop:col-span-4 space-y-6 laptop:border-l laptop:border-[var(--color-border)] laptop:pl-8"
           >
             <p className="font-body text-sm tablet:text-base text-[var(--color-text-secondary)] leading-relaxed">
-              Engineering deterministic full-stack web platforms, backend systems in Java &amp; Spring Boot, and analytical research in Explainable AI (XAI) interpretability.
+              Engineering robust full-stack platforms with Java &amp; Spring Boot 3, and conducting research on Explainable AI (XAI) model interpretability.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-2">
@@ -122,7 +128,7 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Architectural Metadata Grid with Corner Ticks */}
+        {/* Architectural Metadata Grid with Tactical Markers */}
         <motion.div
           variants={itemVariants}
           className="grid grid-cols-2 tablet:grid-cols-4 gap-4 tablet:gap-6 border-t border-[var(--color-border)] pt-8 font-mono text-xs"
@@ -141,7 +147,7 @@ export default function Hero() {
 
           <div className="border border-[var(--color-border)] p-4 bg-[#121212]/80 drafting-corner space-y-1">
             <span className="text-[var(--color-text-tertiary)] text-[10px] uppercase tracking-wider block">
-              CORE DISCIPLINES
+              DISCIPLINES
             </span>
             <div className="text-[var(--color-text-primary)] text-sm font-medium">
               Java &amp; Python
@@ -153,7 +159,7 @@ export default function Hero() {
 
           <div className="border border-[var(--color-border)] p-4 bg-[#121212]/80 drafting-corner space-y-1">
             <span className="text-[var(--color-text-tertiary)] text-[10px] uppercase tracking-wider block">
-              FLAGSHIP WORK
+              TACTICAL PLAY
             </span>
             <div className="text-[var(--color-text-primary)] text-sm font-medium">
               AgniPress &amp; XAI
