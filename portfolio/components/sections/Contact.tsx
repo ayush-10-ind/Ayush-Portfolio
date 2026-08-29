@@ -1,8 +1,12 @@
-// components/sections/Contact.tsx
-// Verified contact details & communication channels for Ayush Trivedi
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
 import { profile } from "@/lib/data/profile";
+import ScrollReveal from "@/components/animations/ScrollReveal";
 
 export default function Contact() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section
       id="contact"
@@ -11,29 +15,31 @@ export default function Contact() {
     >
       <div className="max-w-[var(--max-width)] mx-auto">
         {/* Section Header */}
-        <div className="flex items-baseline gap-6 mb-16 border-b border-[var(--color-border)] pb-6">
-          <span
-            className="font-display text-[var(--color-accent)] italic text-4xl tablet:text-5xl font-light"
-            aria-hidden="true"
-          >
-            06
-          </span>
-          <div>
-            <span className="font-mono text-xs text-[var(--color-text-tertiary)] uppercase tracking-[0.2em] block mb-1">
-              Communication & Inquiries
-            </span>
-            <h2
-              className="font-display text-[var(--color-text-primary)] font-normal tracking-tight"
-              style={{ fontSize: "var(--text-heading-lg)" }}
+        <ScrollReveal direction="up" distance={20}>
+          <div className="flex items-baseline gap-6 mb-16 border-b border-[var(--color-border)] pb-6">
+            <span
+              className="font-display text-[var(--color-accent)] italic text-4xl tablet:text-5xl font-light"
+              aria-hidden="true"
             >
-              Initiate Contact.
-            </h2>
+              06
+            </span>
+            <div>
+              <span className="font-mono text-xs text-[var(--color-text-tertiary)] uppercase tracking-[0.2em] block mb-1">
+                Communication & Inquiries
+              </span>
+              <h2
+                className="font-display text-[var(--color-text-primary)] font-normal tracking-tight"
+                style={{ fontSize: "var(--text-heading-lg)" }}
+              >
+                Initiate Contact.
+              </h2>
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
 
         <div className="grid laptop:grid-cols-12 gap-12 items-start">
           {/* Left Column: Direct Call to Action */}
-          <div className="laptop:col-span-7 space-y-6">
+          <ScrollReveal direction="up" distance={20} delay={0.1} className="laptop:col-span-7 space-y-6">
             <p className="font-body text-base tablet:text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-xl">
               Available for software engineering internships, technical collaborations, and full-stack development opportunities. Feel free to reach out directly.
             </p>
@@ -43,12 +49,13 @@ export default function Contact() {
               <span className="font-mono text-xs text-[var(--color-text-tertiary)] uppercase tracking-wider block mb-2">
                 Primary Email Channel
               </span>
-              <a
+              <motion.a
+                whileHover={shouldReduceMotion ? {} : { x: 4 }}
                 href={`mailto:${profile.email}`}
-                className="font-display text-2xl tablet:text-4xl text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors break-all underline decoration-1 decoration-[var(--color-border)] hover:decoration-[var(--color-accent)] underline-offset-8"
+                className="font-display text-2xl tablet:text-4xl text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors break-all underline decoration-1 decoration-[var(--color-border)] hover:decoration-[var(--color-accent)] underline-offset-8 inline-block"
               >
                 {profile.email}
-              </a>
+              </motion.a>
             </div>
 
             {/* Direct Phone */}
@@ -63,17 +70,18 @@ export default function Contact() {
                 +91 8303155683
               </a>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Right Column: Channel Cards & Verification */}
-          <div className="laptop:col-span-5 space-y-4 font-mono text-xs">
+          <ScrollReveal direction="up" distance={20} delay={0.2} className="laptop:col-span-5 space-y-4 font-mono text-xs">
             <div className="border border-[var(--color-border)] p-6 bg-[#141414]/50 space-y-4">
               <span className="text-[var(--color-text-tertiary)] uppercase tracking-wider block border-b border-[var(--color-border)] pb-2">
                 Professional Channels
               </span>
 
               <div className="space-y-3">
-                <a
+                <motion.a
+                  whileHover={shouldReduceMotion ? {} : { x: 4 }}
                   href="https://linkedin.com"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -83,9 +91,10 @@ export default function Contact() {
                     LinkedIn Profile
                   </span>
                   <span className="text-[var(--color-accent)]">↗</span>
-                </a>
+                </motion.a>
 
-                <a
+                <motion.a
+                  whileHover={shouldReduceMotion ? {} : { x: 4 }}
                   href="https://github.com"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -95,7 +104,7 @@ export default function Contact() {
                     GitHub Repositories
                   </span>
                   <span className="text-[var(--color-accent)]">↗</span>
-                </a>
+                </motion.a>
               </div>
             </div>
 
@@ -109,7 +118,7 @@ export default function Contact() {
                 <span className="text-[var(--color-success)]">{profile.availability}</span>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
 
         {/* Bottom Editorial Footer */}

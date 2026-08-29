@@ -1,9 +1,12 @@
-// components/sections/Experience.tsx
-// Verified experience, education, and credentials for Ayush Trivedi
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
 import { getAllExperiences, educationList, certifications } from "@/lib/data/experience";
+import ScrollReveal from "@/components/animations/ScrollReveal";
 
 export default function Experience() {
   const experiences = getAllExperiences();
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <section
@@ -13,29 +16,31 @@ export default function Experience() {
     >
       <div className="max-w-[var(--max-width)] mx-auto">
         {/* Section Header */}
-        <div className="flex items-baseline gap-6 mb-16 border-b border-[var(--color-border)] pb-6">
-          <span
-            className="font-display text-[var(--color-accent)] italic text-4xl tablet:text-5xl font-light"
-            aria-hidden="true"
-          >
-            04
-          </span>
-          <div>
-            <span className="font-mono text-xs text-[var(--color-text-tertiary)] uppercase tracking-[0.2em] block mb-1">
-              Work History & Credentials
-            </span>
-            <h2
-              className="font-display text-[var(--color-text-primary)] font-normal tracking-tight"
-              style={{ fontSize: "var(--text-heading-lg)" }}
+        <ScrollReveal direction="up" distance={20}>
+          <div className="flex items-baseline gap-6 mb-16 border-b border-[var(--color-border)] pb-6">
+            <span
+              className="font-display text-[var(--color-accent)] italic text-4xl tablet:text-5xl font-light"
+              aria-hidden="true"
             >
-              Experience & Education.
-            </h2>
+              04
+            </span>
+            <div>
+              <span className="font-mono text-xs text-[var(--color-text-tertiary)] uppercase tracking-[0.2em] block mb-1">
+                Work History & Credentials
+              </span>
+              <h2
+                className="font-display text-[var(--color-text-primary)] font-normal tracking-tight"
+                style={{ fontSize: "var(--text-heading-lg)" }}
+              >
+                Experience & Education.
+              </h2>
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
 
         <div className="grid laptop:grid-cols-12 gap-12">
           {/* Left Column: Work Experience Timeline */}
-          <div className="laptop:col-span-7 space-y-12">
+          <ScrollReveal direction="up" distance={20} delay={0.1} className="laptop:col-span-7 space-y-12">
             <span className="font-mono text-xs text-[var(--color-accent)] uppercase tracking-wider block border-b border-[var(--color-border)] pb-2">
               Work History & Internships
             </span>
@@ -45,7 +50,7 @@ export default function Experience() {
                 <div key={exp.id} className="relative group">
                   {/* Timeline dot */}
                   <div
-                    className="absolute -left-[31px] top-1.5 w-2.5 h-2.5 rounded-full bg-[var(--color-accent)] ring-4 ring-[#0C0C0C]"
+                    className="absolute -left-[31px] top-1.5 w-2.5 h-2.5 rounded-full bg-[var(--color-accent)] ring-4 ring-[#0C0C0C] group-hover:scale-125 transition-transform duration-200"
                     aria-hidden="true"
                   />
 
@@ -94,21 +99,22 @@ export default function Experience() {
                 </div>
               ))}
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Right Column: Education & Certifications */}
           <div className="laptop:col-span-5 space-y-10">
             {/* Education */}
-            <div className="space-y-4">
+            <ScrollReveal direction="up" distance={20} delay={0.2} className="space-y-4">
               <span className="font-mono text-xs text-[var(--color-accent)] uppercase tracking-wider block border-b border-[var(--color-border)] pb-2">
                 Formal Education
               </span>
 
               <div className="space-y-4">
                 {educationList.map((edu) => (
-                  <div
+                  <motion.div
                     key={edu.id}
-                    className="border border-[var(--color-border)] p-5 bg-[#141414]/40 space-y-1.5"
+                    whileHover={shouldReduceMotion ? {} : { y: -2 }}
+                    className="border border-[var(--color-border)] p-5 bg-[#141414]/40 space-y-1.5 transition-colors duration-200 hover:border-[var(--color-accent)]"
                   >
                     <div className="flex justify-between items-baseline">
                       <h4 className="font-display text-sm text-[var(--color-text-primary)] font-medium">
@@ -125,22 +131,23 @@ export default function Experience() {
                       <span>{edu.location}</span>
                       <span>{edu.period}</span>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </ScrollReveal>
 
             {/* Certifications */}
-            <div className="space-y-4">
+            <ScrollReveal direction="up" distance={20} delay={0.3} className="space-y-4">
               <span className="font-mono text-xs text-[var(--color-accent)] uppercase tracking-wider block border-b border-[var(--color-border)] pb-2">
                 Verified Certifications
               </span>
 
               <div className="space-y-2.5">
                 {certifications.map((cert, cIdx) => (
-                  <div
+                  <motion.div
                     key={cIdx}
-                    className="flex items-center justify-between p-3.5 border border-[var(--color-border)] bg-[#141414]/30 font-mono text-xs"
+                    whileHover={shouldReduceMotion ? {} : { x: 3 }}
+                    className="flex items-center justify-between p-3.5 border border-[var(--color-border)] bg-[#141414]/30 font-mono text-xs transition-colors duration-200 hover:border-[var(--color-accent)]"
                   >
                     <div>
                       <span className="text-[var(--color-text-primary)] block">
@@ -153,10 +160,10 @@ export default function Experience() {
                     <span className="text-[var(--color-accent)] text-[10px] uppercase tracking-wider border border-[var(--color-border)] px-2 py-0.5">
                       Verified
                     </span>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </div>
