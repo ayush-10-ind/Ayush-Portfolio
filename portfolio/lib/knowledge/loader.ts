@@ -2,10 +2,8 @@
 // Knowledge base loader and structured domain retrieval for Ayush Trivedi's portfolio
 
 import { EntityTopic } from "@/lib/ai/entityExtraction";
-import { profile } from "@/lib/data/profile";
 import { projects } from "@/lib/data/projects";
-import { experiences, educationList, certifications } from "@/lib/data/experience";
-import { skillGroups } from "@/lib/data/skills";
+import { educationList } from "@/lib/data/experience";
 
 /**
  * Retrieve targeted, verified factual context based on extracted topic
@@ -98,7 +96,6 @@ export function getContextForTopic(topic: EntityTopic, secondaryTopics: EntityTo
     }
 
     case "aicte_internship": {
-      const exp = experiences[0];
       sections.push(`
 === INDUSTRY EXPERIENCE: AICTE CODE TECHNOLOGIES ===
 - Role: Python Developer Intern
