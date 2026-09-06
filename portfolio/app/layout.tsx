@@ -14,7 +14,11 @@ import "@fontsource/jetbrains-mono/500.css";
 import "./globals.css";
 
 export const viewport: Viewport = {
+<<<<<<< HEAD
   themeColor: "#0a0b0d",
+=======
+  themeColor: "#F5F1E8",
+>>>>>>> 37e1f51 (feat: implement hand-drawn 3d walkthrough experience based on storyboard)
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -24,7 +28,11 @@ const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://ayush-portfolio.vercel.app";
 
 export const metadata: Metadata = {
+<<<<<<< HEAD
   title: "Ayush Trivedi — Software Engineer & CS Student",
+=======
+  title: "Ayush Trivedi ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Software Engineer & CS Student",
+>>>>>>> 37e1f51 (feat: implement hand-drawn 3d walkthrough experience based on storyboard)
   description:
     "An interactive animated film about Ayush Trivedi — Computer Science student at NIET Greater Noida (8.4 CGPA), Java & Spring Boot developer, and Explainable AI researcher. Travel through his world.",
   keywords: [
@@ -46,14 +54,22 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: siteUrl,
+<<<<<<< HEAD
     title: "Ayush Trivedi — Software Engineer & CS Student",
+=======
+    title: "Ayush Trivedi ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Software Engineer & CS Student",
+>>>>>>> 37e1f51 (feat: implement hand-drawn 3d walkthrough experience based on storyboard)
     description:
       "A cinematic 3D journey through Ayush Trivedi's world: AgniPress full-stack engine, Explainable AI research, verified credentials, and a grounded archive.",
     siteName: "Ayush Trivedi Portfolio",
   },
   twitter: {
     card: "summary_large_image",
+<<<<<<< HEAD
     title: "Ayush Trivedi — Software Engineer & CS Student",
+=======
+    title: "Ayush Trivedi ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Software Engineer & CS Student",
+>>>>>>> 37e1f51 (feat: implement hand-drawn 3d walkthrough experience based on storyboard)
     description:
       "A cinematic 3D journey through Ayush Trivedi's engineering world.",
   },

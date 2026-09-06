@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 /* ==========================================================================
+<<<<<<< HEAD
    SEVEN CHAMBERS — ink · paper · gold · cinematic
    ========================================================================== */
 
@@ -31,10 +32,63 @@
 }
 
 /* ------------------------------------------------------------------ base */
+=======
+   Hand-Drawn Anime Sketch & Parchment Palette — Where Creativity Meets Code
+   ========================================================================== */
+
+:root {
+  --color-paper-base:       #F5F1E8;
+  --color-paper-alt:        #EAE4D4;
+  --color-paper-card:       #FFFDF8;
+  --color-ink-primary:      #1A1D20;
+  --color-ink-secondary:    #4A5056;
+  --color-ink-faint:        #8C9298;
+
+  --color-terracotta:       #D96B43;
+  --color-terracotta-subtle: #F7EDE8;
+  --color-wano-green:       #2C6E49;
+  --color-amber-lantern:    #D4A853;
+
+  --color-sketch-line:      rgba(26, 29, 32, 0.2);
+  --color-sketch-strong:    rgba(26, 29, 32, 0.85);
+
+  --font-display:  'Playfair Display', Georgia, serif;
+  --font-body:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:     'JetBrains Mono', 'Fira Code', monospace;
+
+  --text-display-xl: clamp(52px, 8.5vw, 130px);
+  --text-display-lg: clamp(38px, 6vw, 88px);
+  --text-display-md: clamp(26px, 4vw, 54px);
+  --text-heading-lg: clamp(20px, 2.2vw, 32px);
+  --text-heading-md: clamp(16px, 1.6vw, 24px);
+  --text-body-lg:    clamp(15px, 1.2vw, 18px);
+  --text-body-md:    clamp(13px, 1.0vw, 15px);
+  --text-body-sm:    12px;
+  --text-mono-md:    13px;
+  --text-mono-sm:    11px;
+
+  --max-width:     1400px;
+  --gutter:        clamp(16px, 4vw, 80px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-instant:   0ms;
+    --dur-fast:      0ms;
+    --dur-normal:    0ms;
+  }
+}
+
+/* ==========================================================================
+   Base Styles & Sketched Paper Environment
+   ========================================================================== */
+
+>>>>>>> 37e1f51 (feat: implement hand-drawn 3d walkthrough experience based on storyboard)
 html {
   scroll-behavior: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+<<<<<<< HEAD
   background: var(--color-ink);
 }
 
@@ -42,8 +96,21 @@ body {
   margin: 0;
   background: var(--color-ink);
   color: var(--color-text);
+=======
+  background-color: var(--color-paper-base);
+}
+
+body {
+  background-color: var(--color-paper-base);
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(217, 107, 67, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 85% 85%, rgba(44, 110, 73, 0.03) 0%, transparent 50%),
+    linear-gradient(to bottom, transparent, rgba(234, 228, 212, 0.4) 100%);
+  color: var(--color-ink-primary);
+>>>>>>> 37e1f51 (feat: implement hand-drawn 3d walkthrough experience based on storyboard)
   font-family: var(--font-body);
   overflow-x: hidden;
+<<<<<<< HEAD
   overscroll-behavior-y: none;
 }
 
@@ -57,21 +124,119 @@ body {
 }
 ::-webkit-scrollbar-track {
   background: var(--color-ink);
+=======
+}
+
+/* Perspective Floorboards Grid */
+.sketch-floor {
+  background-size: 60px 60px;
+  background-image:
+    linear-gradient(to right, rgba(26, 29, 32, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(26, 29, 32, 0.08) 1px, transparent 1px);
+}
+
+/* Manga / Sketch Outline Style */
+.sketch-box {
+  background-color: var(--color-paper-card);
+  border: 1.5px solid var(--color-ink-primary);
+  box-shadow: 4px 4px 0px 0px rgba(26, 29, 32, 0.9);
+}
+
+.sketch-box-subtle {
+  background-color: var(--color-paper-card);
+  border: 1px solid rgba(26, 29, 32, 0.2);
+  box-shadow: 2px 2px 0px 0px rgba(26, 29, 32, 0.15);
+}
+
+.sketch-frame {
+  background-color: var(--color-paper-card);
+  border: 2px solid var(--color-ink-primary);
+  box-shadow: 6px 6px 0px 0px rgba(26, 29, 32, 0.85);
+}
+
+.sketch-door {
+  background: linear-gradient(180deg, #FDFBF7 0%, #EFE9DB 100%);
+  border: 2px solid var(--color-ink-primary);
+  box-shadow: 5px 5px 0px 0px rgba(26, 29, 32, 0.9);
+}
+
+/* Code Editor Window */
+.code-window {
+  background-color: #12161A;
+  border: 2px solid var(--color-ink-primary);
+  box-shadow: 8px 8px 0px 0px rgba(26, 29, 32, 0.9);
+  color: #F0F4F8;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--color-ink-primary);
+  letter-spacing: -0.015em;
+}
+
+p {
+  color: var(--color-ink-secondary);
+  max-width: 65ch;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+code, pre, kbd, samp {
+  font-family: var(--font-mono);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--color-terracotta-subtle);
+  color: var(--color-terracotta);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  background: var(--color-paper-base);
+>>>>>>> 37e1f51 (feat: implement hand-drawn 3d walkthrough experience based on storyboard)
 }
 ::-webkit-scrollbar-thumb {
+<<<<<<< HEAD
   background: #26241f;
   border-radius: 4px;
 }
 
 /* skip link */
+=======
+  background: var(--color-ink-faint);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-terracotta);
+}
+
+/* Skip to Content Link */
+>>>>>>> 37e1f51 (feat: implement hand-drawn 3d walkthrough experience based on storyboard)
 .skip-link {
   position: fixed;
   top: -100px;
   left: 16px;
+<<<<<<< HEAD
   z-index: 100;
   padding: 10px 16px;
   background: var(--color-gold);
   color: var(--color-ink);
+=======
+  background: var(--color-terracotta);
+  color: #FFFFFF;
+  padding: 8px 16px;
+>>>>>>> 37e1f51 (feat: implement hand-drawn 3d walkthrough experience based on storyboard)
   font-family: var(--font-mono);
   font-size: 12px;
   text-transform: uppercase;
