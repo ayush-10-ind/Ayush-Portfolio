@@ -8,7 +8,7 @@ import { extractEntitiesAndTopic } from "@/lib/ai/entityExtraction";
 import { getContextForTopic } from "@/lib/knowledge/loader";
 import { buildContext } from "@/lib/ai/contextBuilder";
 import { groundingCheck } from "@/lib/ai/groundingCheck";
-import type { AssistantRequest, AssistantResponse } from "@/types/assistant";
+import type { AssistantRequest, AssistantResponse, Intent } from "@/types/assistant";
 
 // ── In-Memory Rate Limiting ───────────────────────────────────────────────
 const requestCounts = new Map<string, { count: number; resetAt: number }>();
@@ -124,7 +124,7 @@ export async function POST(req: NextRequest) {
     const fallbackAnswer = generateVerifiedFallback(primaryTopic, message);
     const responsePayload: AssistantResponse = {
       response: fallbackAnswer,
-      intent: primaryTopic as any,
+      intent: primaryTopic as unknown as Intent,
       sources: [resolvedSubject],
     };
     return NextResponse.json(responsePayload);
@@ -155,14 +155,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({
         response:
           "I don't have enough verified information in Ayush's portfolio records to answer that accurately. You can reach Ayush directly at ayushtrivediayushtrivedi2@gmail.com for more details.",
-        intent: primaryTopic as any,
+        intent: primaryTopic as unknown as Intent,
         sources: [resolvedSubject],
       });
     }
 
     const responsePayload: AssistantResponse = {
       response: rawResponse,
-      intent: primaryTopic as any,
+      intent: primaryTopic as unknown as Intent,
       sources: [resolvedSubject],
     };
 
@@ -173,7 +173,7 @@ export async function POST(req: NextRequest) {
     const fallbackAnswer = generateVerifiedFallback(primaryTopic, message);
     return NextResponse.json({
       response: fallbackAnswer,
-      intent: primaryTopic as any,
+      intent: primaryTopic as unknown as Intent,
       sources: [resolvedSubject],
     });
   }

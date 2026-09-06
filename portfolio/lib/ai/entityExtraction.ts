@@ -39,8 +39,8 @@ export function extractEntitiesAndTopic(
   history: Message[] = [],
   pageContext?: ConversationContext
 ): ExtractionResult {
+  void pageContext;
   const q = query.toLowerCase().trim();
-  const secondaryTopics: EntityTopic[] = [];
 
   // Check recent conversation history for active topic resolution
   let priorTopic: EntityTopic | null = null;
@@ -75,7 +75,7 @@ export function extractEntitiesAndTopic(
     /\b(it|this|that|the project|the app|the system|the backend|the challenge|the database|why spring boot|what db|how does it work)\b/i.test(q);
 
   // 1. Language & Technical Decisions (High Priority)
-  if (/\b(why java|why did .* choose java|why does .* use java|what made .* choose java|why java .* python|java language)\b/i.test(q)) {
+  if (/\b(why java|why did .* choose java|why does .* choose java|why .* choose java|why does .* use java|what made .* choose java|why java .* python|java language)\b/i.test(q)) {
     return {
       primaryTopic: "java",
       secondaryTopics: ["flappy_bird", "agnipress"],
