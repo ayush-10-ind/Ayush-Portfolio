@@ -20,25 +20,45 @@ export default function OpenSkyXaiScene({ progress }: SceneProps) {
     opacity = Math.max(0, 1 - (progress - 0.72) / 0.05);
   }
 
+  const cloudShift = (progress - 0.60) * 80;
+
   return (
     <div
       className="absolute inset-0 flex flex-col justify-between p-6 tablet:p-12 laptop:p-16 transition-opacity duration-100 pointer-events-auto overflow-y-auto"
       style={{ opacity }}
     >
+      {/* Sketched Cloudscape & Mountain Ridges Background */}
+      <div className="absolute inset-0 pointer-events-none z-0 opacity-30 flex flex-col justify-between overflow-hidden">
+        {/* Floating Clouds */}
+        <div className="flex justify-between px-8 pt-12 transition-transform duration-75" style={{ transform: `translateX(${cloudShift}px)` }}>
+          <svg className="w-40 h-20 text-[var(--color-ink-primary)]" viewBox="0 0 100 50" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <path d="M10 35 C10 25, 25 15, 40 20 C50 10, 70 10, 80 25 C90 25, 95 35, 85 40 C75 45, 20 45, 10 35 Z" strokeDasharray="3 3" />
+          </svg>
+          <svg className="w-56 h-28 text-[var(--color-ink-primary)]" viewBox="0 0 120 60" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <path d="M15 40 C15 28, 30 18, 48 24 C60 12, 84 12, 96 30 C108 30, 114 42, 102 48 C90 54, 25 54, 15 40 Z" strokeDasharray="3 3" />
+          </svg>
+        </div>
+
+        {/* Mountain Ridge Silhouette */}
+        <svg className="w-full h-36 text-[var(--color-ink-primary)]" viewBox="0 0 1000 150" preserveAspectRatio="none" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M0 150 L150 80 L320 120 L500 50 L680 110 L850 70 L1000 150" />
+        </svg>
+      </div>
+
       {/* Header */}
-      <div className="flex flex-col tablet:flex-row tablet:items-center justify-between gap-3 border-b border-[var(--color-sketch-line)] pb-4 font-mono text-[11px] text-[var(--color-ink-secondary)] uppercase tracking-widest">
+      <div className="flex flex-col tablet:flex-row tablet:items-center justify-between gap-3 border-b border-[var(--color-sketch-line)] pb-4 font-mono text-[11px] text-[var(--color-ink-secondary)] uppercase tracking-widest relative z-20">
         <div className="flex items-center gap-2">
-          <span className="font-semibold text-[var(--color-terracotta)]">STAGE 05 //</span>
+          <span className="font-bold text-[var(--color-terracotta)]">STAGE 05 //</span>
           <span>THE OPEN SKY VISTA · EXPLAINABLE AI</span>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-[var(--color-wano-green)] font-medium">PYTHON · FEATURE ATTRIBUTION</span>
+          <span className="text-[var(--color-wano-green)] font-semibold">PYTHON · FEATURE ATTRIBUTION</span>
           {xai.links?.github && (
             <a
               href={xai.links.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="border-2 border-[var(--color-ink-primary)] bg-[var(--color-paper-card)] hover:bg-[var(--color-terracotta)] hover:text-white text-[var(--color-ink-primary)] px-3 py-1 text-[10px] uppercase font-semibold transition-colors shadow-xs"
+              className="border-2 border-[var(--color-ink-primary)] bg-[var(--color-paper-card)] hover:bg-[var(--color-terracotta)] hover:text-white text-[var(--color-ink-primary)] px-3 py-1 text-[10px] uppercase font-bold transition-colors shadow-xs"
             >
               GitHub ↗
             </a>
@@ -48,7 +68,7 @@ export default function OpenSkyXaiScene({ progress }: SceneProps) {
               href={xai.links.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="border-2 border-[var(--color-ink-primary)] bg-[var(--color-paper-card)] hover:bg-[var(--color-terracotta)] hover:text-white text-[var(--color-ink-primary)] px-3 py-1 text-[10px] uppercase font-semibold transition-colors shadow-xs"
+              className="border-2 border-[var(--color-ink-primary)] bg-[var(--color-paper-card)] hover:bg-[var(--color-terracotta)] hover:text-white text-[var(--color-ink-primary)] px-3 py-1 text-[10px] uppercase font-bold transition-colors shadow-xs"
             >
               Demo ↗
             </a>
@@ -57,9 +77,9 @@ export default function OpenSkyXaiScene({ progress }: SceneProps) {
       </div>
 
       {/* Main Dossier Content */}
-      <div className="my-auto max-w-5xl mx-auto w-full space-y-6">
+      <div className="my-auto max-w-5xl mx-auto w-full space-y-6 relative z-10">
         <div className="space-y-2 border-b border-[var(--color-sketch-line)] pb-4">
-          <span className="font-mono text-xs text-[var(--color-terracotta)] uppercase tracking-widest block font-medium">
+          <span className="font-mono text-xs text-[var(--color-terracotta)] uppercase tracking-widest block font-bold">
             {xai.type} · {xai.period}
           </span>
           <h2 className="font-display text-3xl tablet:text-5xl text-[var(--color-ink-primary)] font-normal">
@@ -73,33 +93,33 @@ export default function OpenSkyXaiScene({ progress }: SceneProps) {
         {/* Sketched Cloudscape Interpretability Flow */}
         <div className="sketch-box p-6 space-y-4">
           <div className="flex justify-between items-baseline border-b border-[var(--color-sketch-line)] pb-2 font-mono text-[10px] uppercase tracking-widest">
-            <span className="text-[var(--color-terracotta)] font-semibold">MODEL INTERPRETABILITY LENS</span>
+            <span className="text-[var(--color-terracotta)] font-bold">MODEL INTERPRETABILITY LENS</span>
             <span className="text-[var(--color-ink-secondary)]">FEATURE ATTRIBUTION AUDIT</span>
           </div>
 
           <div className="grid grid-cols-2 tablet:grid-cols-5 gap-2.5 font-mono text-[11px] text-center">
             <div className="border border-[var(--color-ink-primary)] p-3 bg-[var(--color-paper-card)] space-y-1">
-              <span className="text-[var(--color-terracotta)] text-[10px] block font-semibold">01 INPUT</span>
+              <span className="text-[var(--color-terracotta)] text-[10px] block font-bold">01 INPUT</span>
               <span className="text-[var(--color-ink-primary)] block font-medium">Feature Vectors</span>
             </div>
 
             <div className="border border-[var(--color-ink-primary)] p-3 bg-[var(--color-paper-card)] space-y-1">
-              <span className="text-[var(--color-terracotta)] text-[10px] block font-semibold">02 INFERENCE</span>
+              <span className="text-[var(--color-terracotta)] text-[10px] block font-bold">02 INFERENCE</span>
               <span className="text-[var(--color-ink-primary)] block font-medium">Black-Box ML</span>
             </div>
 
             <div className="border border-[var(--color-ink-primary)] p-3 bg-[var(--color-paper-card)] space-y-1">
-              <span className="text-[var(--color-terracotta)] text-[10px] block font-semibold">03 OUTPUT</span>
+              <span className="text-[var(--color-terracotta)] text-[10px] block font-bold">03 OUTPUT</span>
               <span className="text-[var(--color-ink-primary)] block font-medium">Prediction</span>
             </div>
 
             <div className="border border-[var(--color-ink-primary)] p-3 bg-[var(--color-paper-card)] space-y-1">
-              <span className="text-[var(--color-wano-green)] text-[10px] block font-semibold">04 AUDIT</span>
+              <span className="text-[var(--color-wano-green)] text-[10px] block font-bold">04 AUDIT</span>
               <span className="text-[var(--color-ink-primary)] block font-medium">Attribution</span>
             </div>
 
             <div className="border-2 border-[var(--color-wano-green)] p-3 bg-[#EAF2ED] space-y-1">
-              <span className="text-[var(--color-wano-green)] text-[10px] block font-semibold">05 OUTPUT</span>
+              <span className="text-[var(--color-wano-green)] text-[10px] block font-bold">05 OUTPUT</span>
               <span className="text-[var(--color-ink-primary)] block font-medium">Explanation</span>
             </div>
           </div>
@@ -108,7 +128,7 @@ export default function OpenSkyXaiScene({ progress }: SceneProps) {
         {/* Problem & Approach Grid */}
         <div className="grid grid-cols-1 tablet:grid-cols-2 gap-4 font-body text-xs">
           <div className="sketch-box-subtle p-5 space-y-2">
-            <span className="font-mono text-[10px] text-[var(--color-terracotta)] uppercase block font-semibold">
+            <span className="font-mono text-[10px] text-[var(--color-terracotta)] uppercase block font-bold">
               01 / RESEARCH CHALLENGE
             </span>
             <p className="text-[var(--color-ink-secondary)] leading-relaxed">
@@ -117,7 +137,7 @@ export default function OpenSkyXaiScene({ progress }: SceneProps) {
           </div>
 
           <div className="sketch-box-subtle p-5 space-y-2">
-            <span className="font-mono text-[10px] text-[var(--color-wano-green)] uppercase block font-semibold">
+            <span className="font-mono text-[10px] text-[var(--color-wano-green)] uppercase block font-bold">
               02 / RESEARCH METHODOLOGY
             </span>
             <p className="text-[var(--color-ink-secondary)] leading-relaxed">
@@ -128,9 +148,9 @@ export default function OpenSkyXaiScene({ progress }: SceneProps) {
       </div>
 
       {/* Footer Guidance */}
-      <div className="flex justify-between border-t border-[var(--color-sketch-line)] pt-4 font-mono text-[10px] text-[var(--color-ink-secondary)] uppercase tracking-widest">
+      <div className="flex justify-between border-t border-[var(--color-sketch-line)] pt-4 font-mono text-[10px] text-[var(--color-ink-secondary)] uppercase tracking-widest relative z-20">
         <span>DESCENDING BACK INTO CAREER EXHIBITION HALL</span>
-        <span className="text-[var(--color-terracotta)] font-medium">SCROLL TO ADVANCE →</span>
+        <span className="text-[var(--color-terracotta)] font-bold">SCROLL TO ADVANCE →</span>
       </div>
     </div>
   );
