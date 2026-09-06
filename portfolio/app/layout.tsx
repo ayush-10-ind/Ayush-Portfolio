@@ -1,106 +1,82 @@
 import type { Metadata, Viewport } from "next";
-// Self-hosted fonts (no build-time network dependency).
-import "@fontsource/inter/300.css";
-import "@fontsource/inter/400.css";
-import "@fontsource/inter/500.css";
-import "@fontsource/inter/600.css";
-import "@fontsource/inter/700.css";
-import "@fontsource/playfair-display/400.css";
-import "@fontsource/playfair-display/500.css";
-import "@fontsource/playfair-display/600.css";
-import "@fontsource/playfair-display/700.css";
-import "@fontsource/jetbrains-mono/400.css";
-import "@fontsource/jetbrains-mono/500.css";
+import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
 export const viewport: Viewport = {
-<<<<<<< HEAD
-  themeColor: "#0a0b0d",
-=======
   themeColor: "#F5F1E8",
->>>>>>> 37e1f51 (feat: implement hand-drawn 3d walkthrough experience based on storyboard)
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
 };
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://ayush-portfolio.vercel.app";
+const siteUrl = "https://ayush-portfolio.vercel.app";
 
 export const metadata: Metadata = {
-<<<<<<< HEAD
-  title: "Ayush Trivedi — Software Engineer & CS Student",
-=======
-  title: "Ayush Trivedi ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Software Engineer & CS Student",
->>>>>>> 37e1f51 (feat: implement hand-drawn 3d walkthrough experience based on storyboard)
+  metadataBase: new URL(siteUrl),
+  title: "Ayush Trivedi — Where Creativity Meets Code",
   description:
-    "An interactive animated film about Ayush Trivedi — Computer Science student at NIET Greater Noida (8.4 CGPA), Java & Spring Boot developer, and Explainable AI researcher. Travel through his world.",
+    "An interactive hand-drawn 3D walkthrough portfolio of Ayush Trivedi — Computer Science student at NIET Gr. Noida (8.4 CGPA), Java 21/Spring Boot 3 engineer (AgniPress), and Explainable AI researcher.",
   keywords: [
     "Ayush Trivedi",
     "Software Engineer",
-    "Computer Science",
-    "NIET Greater Noida",
-    "Java",
-    "Spring Boot",
-    "Python",
-    "Explainable AI",
+    "Java Developer",
+    "Spring Boot 3",
     "AgniPress",
+    "Explainable AI",
+    "NIET Greater Noida",
   ],
-  authors: [{ name: "Ayush Trivedi", url: siteUrl }],
+  authors: [{ name: "Ayush Trivedi" }],
   creator: "Ayush Trivedi",
-  metadataBase: new URL(siteUrl),
-  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-<<<<<<< HEAD
-    title: "Ayush Trivedi — Software Engineer & CS Student",
-=======
-    title: "Ayush Trivedi ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Software Engineer & CS Student",
->>>>>>> 37e1f51 (feat: implement hand-drawn 3d walkthrough experience based on storyboard)
+    title: "Ayush Trivedi — Where Creativity Meets Code",
     description:
-      "A cinematic 3D journey through Ayush Trivedi's world: AgniPress full-stack engine, Explainable AI research, verified credentials, and a grounded archive.",
+      "A hand-drawn 3D storyboard journey through Ayush Trivedi's engineering world.",
     siteName: "Ayush Trivedi Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-<<<<<<< HEAD
-    title: "Ayush Trivedi — Software Engineer & CS Student",
-=======
-    title: "Ayush Trivedi ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Software Engineer & CS Student",
->>>>>>> 37e1f51 (feat: implement hand-drawn 3d walkthrough experience based on storyboard)
+    title: "Ayush Trivedi — Where Creativity Meets Code",
     description:
-      "A cinematic 3D journey through Ayush Trivedi's engineering world.",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
+      "A hand-drawn 3D storyboard journey through Ayush Trivedi's engineering world.",
   },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-      </head>
-      <body className="antialiased">
+    <html
+      lang="en"
+      className={`${inter.variable} ${playfair.variable} ${jetbrains.variable}`}
+    >
+      <body className="bg-[#F5F1E8] text-[#1A1D20] antialiased selection:bg-[#F7EDE8] selection:text-[#D96B43]">
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
-        {children}
+        <div id="main-content">{children}</div>
       </body>
     </html>
   );
